@@ -62,6 +62,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation ("androidx.fragment:fragment-ktx:1.8.5")
 
     implementation ("com.google.android.flexbox:flexbox:3.0.0")
 

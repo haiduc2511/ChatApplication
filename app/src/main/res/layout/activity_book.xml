@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etBookTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Book Title"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etBookSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Book Summary"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etFileBookLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="File Book Link"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etAuthorName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Author Name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etBookId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Book ID (for update/delete)"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnAddBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Book" />
+
+    <Button
+        android:id="@+id/btnGetBooks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Books" />
+
+    <Button
+        android:id="@+id/btnUpdateBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Book" />
+
+    <Button
+        android:id="@+id/btnDeleteBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Book" />
+
+</LinearLayout>
