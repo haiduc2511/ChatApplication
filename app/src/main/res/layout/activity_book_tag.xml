@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText for Tag ID -->
+    <EditText
+        android:id="@+id/etTagId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tag ID"
+        android:inputType="text" />
+
+    <!-- EditText for Book ID -->
+    <EditText
+        android:id="@+id/etBookId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Book ID"
+        android:inputType="text" />
+
+    <!-- Button to Add Book Tag -->
+    <Button
+        android:id="@+id/btnAddBookTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Book Tag" />
+
+    <!-- Button to Get All Book Tags -->
+    <Button
+        android:id="@+id/btnGetBookTags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Book Tags" />
+
+</LinearLayout>
