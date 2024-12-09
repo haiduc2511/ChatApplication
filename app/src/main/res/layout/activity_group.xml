@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText for Group ID -->
+    <EditText
+        android:id="@+id/etGroupId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Group ID (for update/delete)"
+        android:inputType="text" />
+
+    <!-- EditText for Group Name -->
+    <EditText
+        android:id="@+id/etGroupName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Group Name"
+        android:inputType="text" />
+
+    <!-- EditText for Book ID -->
+    <EditText
+        android:id="@+id/etBookId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Book ID"
+        android:inputType="text" />
+
+    <!-- EditText for Privacy Mode -->
+    <EditText
+        android:id="@+id/etPrivacyMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Privacy Mode"
+        android:inputType="text" />
+
+    <!-- EditText for Admin User ID -->
+    <EditText
+        android:id="@+id/etAdminUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Admin User ID"
+        android:inputType="text" />
+
+    <!-- Button to Add Group -->
+    <Button
+        android:id="@+id/btnAddGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Group" />
+
+    <!-- Button to Get All Groups -->
+    <Button
+        android:id="@+id/btnGetGroups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Groups" />
+
+    <!-- Button to Update Group -->
+    <Button
+        android:id="@+id/btnUpdateGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Group" />
+
+    <!-- Button to Delete Group -->
+    <Button
+        android:id="@+id/btnDeleteGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Group" />
+
+</LinearLayout>
