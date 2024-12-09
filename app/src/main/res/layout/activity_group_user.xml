@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText for Group ID -->
+    <EditText
+        android:id="@+id/etGroupId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Group ID"
+        android:inputType="text" />
+
+    <!-- EditText for User ID -->
+    <EditText
+        android:id="@+id/etUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="User ID"
+        android:inputType="text" />
+
+    <!-- Button to Add GroupUser -->
+    <Button
+        android:id="@+id/btnAddGroupUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add GroupUser" />
+
+    <!-- Button to Get GroupUsers -->
+    <Button
+        android:id="@+id/btnGetGroupUsers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get GroupUsers" />
+
+    <!-- Button to Update GroupUser -->
+    <Button
+        android:id="@+id/btnUpdateGroupUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update GroupUser" />
+
+    <!-- Button to Delete GroupUser -->
+    <Button
+        android:id="@+id/btnDeleteGroupUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete GroupUser" />
+
+</LinearLayout>
