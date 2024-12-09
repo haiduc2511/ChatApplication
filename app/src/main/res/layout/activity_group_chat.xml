@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText for Group Chat ID -->
+    <EditText
+        android:id="@+id/etGroupChatId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Group Chat ID (for update/delete)"
+        android:inputType="text" />
+
+    <!-- EditText for Theme -->
+    <EditText
+        android:id="@+id/etTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Theme"
+        android:inputType="text" />
+
+    <!-- Button to Add Group Chat -->
+    <Button
+        android:id="@+id/btnAddGroupChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Group Chat" />
+
+    <!-- Button to Get All Group Chats -->
+    <Button
+        android:id="@+id/btnGetGroupChats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Group Chats" />
+
+    <!-- Button to Update Group Chat -->
+    <Button
+        android:id="@+id/btnUpdateGroupChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Group Chat" />
+
+    <!-- Button to Delete Group Chat -->
+    <Button
+        android:id="@+id/btnDeleteGroupChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Group Chat" />
+
+</LinearLayout>

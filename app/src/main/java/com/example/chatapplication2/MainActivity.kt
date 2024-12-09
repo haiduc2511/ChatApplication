@@ -11,6 +11,7 @@ import com.example.chatapplication2.activity.LoginActivity
 import com.example.chatapplication2.activity.RegisterActivity
 import com.example.chatapplication2.activitytest.BookActivity
 import com.example.chatapplication2.activitytest.BookTagActivity
+import com.example.chatapplication2.activitytest.GroupChatActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
         var groupChatButton: Button = findViewById(R.id.groupChatButton)
         groupChatButton.setOnClickListener {
-            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            val intent = Intent(this@MainActivity, GroupChatActivity::class.java)
             startActivity(intent)
         }
         var groupEntryRequestButton: Button = findViewById(R.id.groupEntryRequestButton)

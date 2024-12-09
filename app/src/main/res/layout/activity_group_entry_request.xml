@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText for Group Entry Request ID -->
+    <EditText
+        android:id="@+id/etRequestId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Request ID (for update/delete)"
+        android:inputType="text" />
+
+    <!-- EditText for User ID -->
+    <EditText
+        android:id="@+id/etUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="User ID"
+        android:inputType="text" />
+
+    <!-- EditText for Group ID -->
+    <EditText
+        android:id="@+id/etGroupId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Group ID"
+        android:inputType="text" />
+
+    <!-- EditText for Request Comment -->
+    <EditText
+        android:id="@+id/etRequestComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Request Comment"
+        android:inputType="text" />
+
+    <!-- Button to Add Group Entry Request -->
+    <Button
+        android:id="@+id/btnAddGroupEntryRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Group Entry Request" />
+
+    <!-- Button to Get All Group Entry Requests -->
+    <Button
+        android:id="@+id/btnGetGroupEntryRequests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Group Entry Requests" />
+
+    <!-- Button to Update Group Entry Request -->
+    <Button
+        android:id="@+id/btnUpdateGroupEntryRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Group Entry Request" />
+
+    <!-- Button to Delete Group Entry Request -->
+    <Button
+        android:id="@+id/btnDeleteGroupEntryRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Group Entry Request" />
+
+</LinearLayout>
