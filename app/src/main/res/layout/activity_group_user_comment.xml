@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText for Comment ID -->
+    <EditText
+        android:id="@+id/etCommentId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Comment ID (for update/delete)"
+        android:inputType="text" />
+
+    <!-- EditText for Group User ID -->
+    <EditText
+        android:id="@+id/etGroupUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Group User ID"
+        android:inputType="text" />
+
+    <!-- EditText for Comment Text -->
+    <EditText
+        android:id="@+id/etComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Comment"
+        android:inputType="text" />
+
+    <!-- EditText for Page Number -->
+    <EditText
+        android:id="@+id/etPageNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Page Number"
+        android:inputType="number" />
+
+    <!-- EditText for Page Position -->
+    <EditText
+        android:id="@+id/etPagePosition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Page Position"
+        android:inputType="text" />
+
+    <!-- Button to Add Comment -->
+    <Button
+        android:id="@+id/btnAddComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Comment" />
+
+    <!-- Button to Get All Comments -->
+    <Button
+        android:id="@+id/btnGetComments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Comments" />
+
+    <!-- Button to Update Comment -->
+    <Button
+        android:id="@+id/btnUpdateComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Comment" />
+
+    <!-- Button to Delete Comment -->
+    <Button
+        android:id="@+id/btnDeleteComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Comment" />
+
+</LinearLayout>
