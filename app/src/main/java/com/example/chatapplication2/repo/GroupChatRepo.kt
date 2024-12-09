@@ -14,7 +14,7 @@ class GroupChatRepo {
     // Add a new GroupChat to Firebase
     fun addGroupChat(groupChat: GroupChat, onCompleteListener: OnCompleteListener<Void>) {
         val id = db.collection(COLLECTION_NAME).document().id // Generate a new ID
-        val groupChatWithId = groupChat.copy(gcId = id) // Add generated ID to the groupChat object
+        val groupChatWithId = groupChat.copy(gcid = id) // Add generated ID to the groupChat object
         db.collection(COLLECTION_NAME).document(id).set(groupChatWithId)
             .addOnCompleteListener(onCompleteListener)
     }

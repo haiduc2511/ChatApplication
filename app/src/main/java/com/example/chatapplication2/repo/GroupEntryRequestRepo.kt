@@ -14,7 +14,7 @@ class GroupEntryRequestRepo {
     // Add a new GroupEntryRequest to Firebase
     fun addGroupEntryRequest(entryRequest: GroupEntryRequest, onCompleteListener: OnCompleteListener<Void>) {
         val id = db.collection(COLLECTION_NAME).document().id // Generate a new ID
-        val entryRequestWithId = entryRequest.copy(gERId = id) // Add generated ID to the entryRequest object
+        val entryRequestWithId = entryRequest.copy(gerid = id) // Add generated ID to the entryRequest object
         db.collection(COLLECTION_NAME).document(id).set(entryRequestWithId)
             .addOnCompleteListener(onCompleteListener)
     }

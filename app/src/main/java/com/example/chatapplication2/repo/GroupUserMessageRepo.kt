@@ -14,7 +14,7 @@ class GroupUserMessageRepo {
     // Add a new group user message to Firebase
     fun addGroupUserMessage(message: GroupUserMessage, onCompleteListener: OnCompleteListener<Void>) {
         val id = db.collection(COLLECTION_NAME).document().id // Generate a new ID
-        val messageWithId = message.copy(gUmId = id) // Add generated ID to the message object
+        val messageWithId = message.copy(gumid = id) // Add generated ID to the message object
         db.collection(COLLECTION_NAME).document(id).set(messageWithId)
             .addOnCompleteListener(onCompleteListener)
     }

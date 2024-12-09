@@ -1,5 +1,6 @@
 package com.example.chatapplication2.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,6 +43,9 @@ class BookViewModel : ViewModel() {
             override fun onComplete(task: com.google.android.gms.tasks.Task<QuerySnapshot>) {
                 if (task.isSuccessful) {
                     val books = task.result?.toObjects(Book::class.java) ?: emptyList()
+                    for (j in 0..books.size - 1) {
+                        Log.d("test", books[j].toString())
+                    }
                     _booksLiveData.value = books
                 } else {
                     _errorLiveData.value = task.exception?.message

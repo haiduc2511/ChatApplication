@@ -14,7 +14,7 @@ class TagRepo {
     // Add a new tag to Firebase
     fun addTag(tag: Tag, onCompleteListener: OnCompleteListener<Void>) {
         val id = db.collection(COLLECTION_NAME).document().id // Generate a new ID
-        val tagWithId = tag.copy(tId = id) // Add generated ID to the Tag object
+        val tagWithId = tag.copy(tid = id) // Add generated ID to the Tag object
         db.collection(COLLECTION_NAME).document(id).set(tagWithId)
             .addOnCompleteListener(onCompleteListener)
     }

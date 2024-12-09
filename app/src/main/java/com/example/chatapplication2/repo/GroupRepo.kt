@@ -14,7 +14,7 @@ class GroupRepo {
     // Add a new Group to Firebase
     fun addGroup(group: Group, onCompleteListener: OnCompleteListener<Void>) {
         val id = db.collection(COLLECTION_NAME).document().id // Generate a new ID
-        val groupWithId = group.copy(gId = id) // Add generated ID to the Group object
+        val groupWithId = group.copy(gid = id) // Add generated ID to the Group object
         db.collection(COLLECTION_NAME).document(id).set(groupWithId)
             .addOnCompleteListener(onCompleteListener)
     }

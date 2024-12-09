@@ -5,10 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Tag(
-    val tId: String,
+    val tid: String,
     val tagName: String?
 ) : Parcelable {
     override fun toString(): String {
-        return "Tag(tId='$tId', tagName=$tagName)"
+        return "Tag(tid='$tid', tagName=$tagName)"
     }
 }

@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.chatapplication2.activity.LoginActivity
 import com.example.chatapplication2.activity.RegisterActivity
 import com.example.chatapplication2.activitytest.BookActivity
+import com.example.chatapplication2.activitytest.BookTagActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,5 +31,51 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, BookActivity::class.java)
             startActivity(intent)
         }
+        var bookTagButton: Button = findViewById(R.id.bookTagButton)
+        bookTagButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, BookTagActivity::class.java)
+            startActivity(intent)
+        }
+        var groupChatButton: Button = findViewById(R.id.groupChatButton)
+        groupChatButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            startActivity(intent)
+        }
+        var groupEntryRequestButton: Button = findViewById(R.id.groupEntryRequestButton)
+        groupEntryRequestButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            startActivity(intent)
+        }
+        var groupButton: Button = findViewById(R.id.groupButton)
+        groupButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            startActivity(intent)
+        }
+        var groupUserCommentButton: Button = findViewById(R.id.groupUserCommentButton)
+        groupUserCommentButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            startActivity(intent)
+        }
+        var groupUserMessageButton: Button = findViewById(R.id.groupUserMessageButton)
+        groupUserMessageButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            startActivity(intent)
+        }
+        var groupUserReadingProcessButton: Button = findViewById(R.id.groupUserReadingProcessButton)
+        groupUserReadingProcessButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            startActivity(intent)
+        }
+        var groupUserButton: Button = findViewById(R.id.groupUserButton)
+        groupUserButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            startActivity(intent)
+        }
+        var tagButton: Button = findViewById(R.id.tagButton)
+        tagButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

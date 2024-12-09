@@ -14,7 +14,7 @@ class BookRepo {
     // Add a new book to Firebase
     fun addBook(book: Book, onCompleteListener: OnCompleteListener<Void>) {
         val id = db.collection(COLLECTION_NAME).document().id // Generate a new ID
-        val bookWithId = book.copy(bId = id) // Add generated ID to the Book object
+        val bookWithId = book.copy(bid = id) // Add generated ID to the Book object
         db.collection(COLLECTION_NAME).document(id).set(bookWithId)
             .addOnCompleteListener(onCompleteListener)
     }

@@ -14,7 +14,7 @@ class AuthRepository {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val userId = auth.currentUser?.uid ?: ""
-                    val user = User(uId = userId, email = email, name = name)
+                    val user = User(uid = userId, email = email, name = name)
                     usersCollection.document(userId).set(user)
                         .addOnCompleteListener { userTask ->
                             onComplete(userTask.isSuccessful, if (userTask.isSuccessful) null else "Error saving user")
@@ -39,7 +39,7 @@ class AuthRepository {
     fun getCurrentUser(): User? {
         val firebaseUser = auth.currentUser
         return if (firebaseUser != null) {
-            User(uId = firebaseUser.uid, email = firebaseUser.email ?: "", name = firebaseUser.displayName ?: "")
+            User(uid = firebaseUser.uid, email = firebaseUser.email ?: "", name = firebaseUser.displayName ?: "")
         } else {
             null
         }

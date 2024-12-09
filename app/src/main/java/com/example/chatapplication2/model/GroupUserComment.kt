@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class GroupUserComment(
-    val gUCId: String,
+    val gucid: String,
     val groupUserId: String?,
     var comment: String?,
     val pageNumber: Int?,
@@ -13,6 +13,6 @@ data class GroupUserComment(
     val timeStamp: String?
 ) : Parcelable {
     override fun toString(): String {
-        return "GroupUserComment(gUCId='$gUCId', groupUserId=$groupUserId, comment=$comment, pageNumber=$pageNumber, pagePosition=$pagePosition, timeStamp=$timeStamp)"
+        return "GroupUserComment(gucid='$gucid', groupUserId=$groupUserId, comment=$comment, pageNumber=$pageNumber, pagePosition=$pagePosition, timeStamp=$timeStamp)"
     }
 }

@@ -14,7 +14,7 @@ class GroupUserReadingProcessRepo {
     // Add a new GroupUserReadingProcess to Firebase
     fun addGroupUserReadingProcess(process: GroupUserReadingProcess, onCompleteListener: OnCompleteListener<Void>) {
         val id = db.collection(COLLECTION_NAME).document().id // Generate a new ID
-        val processWithId = process.copy(gURDId = id) // Add generated ID to the object
+        val processWithId = process.copy(gurpid = id) // Add generated ID to the object
         db.collection(COLLECTION_NAME).document(id).set(processWithId)
             .addOnCompleteListener(onCompleteListener)
     }

@@ -14,7 +14,7 @@ class BookTagRepo {
     // Add a new BookTag to Firebase
     fun addBookTag(bookTag: BookTag, onCompleteListener: OnCompleteListener<Void>) {
         val id = db.collection(COLLECTION_NAME).document().id // Generate a new ID
-        val bookTagWithId = bookTag.copy(bTId = id) // Add generated ID to the BookTag object
+        val bookTagWithId = bookTag.copy(btid = id) // Add generated ID to the BookTag object
         db.collection(COLLECTION_NAME).document(id).set(bookTagWithId)
             .addOnCompleteListener(onCompleteListener)
     }

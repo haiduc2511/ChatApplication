@@ -14,7 +14,7 @@ class GroupUserCommentRepo {
     // Add a new GroupUserComment to Firebase
     fun addGroupUserComment(comment: GroupUserComment, onCompleteListener: OnCompleteListener<Void>) {
         val id = db.collection(COLLECTION_NAME).document().id // Generate a new ID
-        val commentWithId = comment.copy(gUCId = id) // Add generated ID to the comment object
+        val commentWithId = comment.copy(gucid = id) // Add generated ID to the comment object
         db.collection(COLLECTION_NAME).document(id).set(commentWithId)
             .addOnCompleteListener(onCompleteListener)
     }

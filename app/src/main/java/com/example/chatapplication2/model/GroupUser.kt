@@ -5,11 +5,11 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class GroupUser(
-    val gUId: String,
+    val guid: String,
     val groupId: String?,
     val userId: String?
 ) : Parcelable {
     override fun toString(): String {
-        return "GroupUser(gUId='$gUId', groupId=$groupId, userId=$userId)"
+        return "GroupUser(guid='$guid', groupId=$groupId, userId=$userId)"
     }
 }

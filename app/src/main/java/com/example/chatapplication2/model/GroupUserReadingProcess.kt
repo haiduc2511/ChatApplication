@@ -5,11 +5,11 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class GroupUserReadingProcess(
-    val gURDId: String,
+    val gurpid: String,
     val readingProcess: String?,
     val timeStamp: String?
 ) : Parcelable {
     override fun toString(): String {
-        return "GroupUserReadingProcess(gURDId='$gURDId', readingProcess=$readingProcess, timeStamp=$timeStamp)"
+        return "GroupUserReadingProcess(gurpid='$gurpid', readingProcess=$readingProcess, timeStamp=$timeStamp)"
     }
 }
