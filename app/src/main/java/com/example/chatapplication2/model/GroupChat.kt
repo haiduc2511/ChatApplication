@@ -5,8 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class GroupChat(
-    val gcid: String,
-    var theme: String?
+    val gcid: String = "",
+    var theme: String = ""
     //TODO: need a groupId in the groupChat maofac
 ) : Parcelable {
     override fun toString(): String {

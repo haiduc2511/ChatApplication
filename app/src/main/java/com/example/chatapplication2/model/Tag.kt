@@ -5,8 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Tag(
-    val tid: String,
-    val tagName: String?
+    val tid: String = "",
+    val tagName: String = ""
 ) : Parcelable {
     override fun toString(): String {
         return "Tag(tid='$tid', tagName=$tagName)"

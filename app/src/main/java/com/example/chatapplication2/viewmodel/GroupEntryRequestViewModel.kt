@@ -38,7 +38,7 @@ class GroupEntryRequestViewModel : ViewModel() {
         groupEntryRequestRepo.getGroupEntryRequests(object : OnCompleteListener<QuerySnapshot> {
             override fun onComplete(task: Task<QuerySnapshot>) {
                 if (task.isSuccessful) {
-                    val entryRequests = task.result?.toObjects(GroupEntryRequest::class.java)
+                    val entryRequests = task.result?.toObjects(GroupEntryRequest::class.java) ?: emptyList()
                     _groupEntryRequestsLiveData.postValue(entryRequests)
                 } else {
                     _errorLiveData.postValue("Error: ${task.exception?.message}")
