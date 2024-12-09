@@ -1,9 +1,6 @@
-package com.example.chatapplication2.activity
+package com.example.chatapplication2.authactivity
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.chatapplication2.R
 
 import android.content.Intent

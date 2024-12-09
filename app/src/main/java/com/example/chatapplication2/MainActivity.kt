@@ -3,12 +3,9 @@ package com.example.chatapplication2
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.chatapplication2.activity.LoginActivity
-import com.example.chatapplication2.activity.RegisterActivity
+import com.example.chatapplication2.authactivity.LoginActivity
+import com.example.chatapplication2.authactivity.RegisterActivity
 import com.example.chatapplication2.activitytest.BookActivity
 import com.example.chatapplication2.activitytest.BookTagActivity
 import com.example.chatapplication2.activitytest.GroupActivity
@@ -19,7 +16,6 @@ import com.example.chatapplication2.activitytest.GroupUserCommentActivity
 import com.example.chatapplication2.activitytest.GroupUserMessageActivity
 import com.example.chatapplication2.activitytest.GroupUserReadingProcessActivity
 import com.example.chatapplication2.activitytest.TagActivity
-import com.example.chatapplication2.model.GroupUserReadingProcess
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
