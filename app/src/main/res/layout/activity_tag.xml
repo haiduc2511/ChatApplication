@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText for Tag ID -->
+    <EditText
+        android:id="@+id/etTagId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tag ID (for update or delete)"
+        android:inputType="text" />
+
+    <!-- EditText for Tag Name -->
+    <EditText
+        android:id="@+id/etTagName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tag Name"
+        android:inputType="text" />
+
+    <!-- Button to Add Tag -->
+    <Button
+        android:id="@+id/btnAddTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Tag" />
+
+    <!-- Button to Get Tags -->
+    <Button
+        android:id="@+id/btnGetTags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Tags" />
+
+    <!-- Button to Update Tag -->
+    <Button
+        android:id="@+id/btnUpdateTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Tag" />
+
+    <!-- Button to Delete Tag -->
+    <Button
+        android:id="@+id/btnDeleteTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Tag" />
+
+</LinearLayout>

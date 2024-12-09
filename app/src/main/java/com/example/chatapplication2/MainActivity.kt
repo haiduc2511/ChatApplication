@@ -18,6 +18,7 @@ import com.example.chatapplication2.activitytest.GroupUserActivity
 import com.example.chatapplication2.activitytest.GroupUserCommentActivity
 import com.example.chatapplication2.activitytest.GroupUserMessageActivity
 import com.example.chatapplication2.activitytest.GroupUserReadingProcessActivity
+import com.example.chatapplication2.activitytest.TagActivity
 import com.example.chatapplication2.model.GroupUserReadingProcess
 
 class MainActivity : AppCompatActivity() {
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         }
         var tagButton: Button = findViewById(R.id.tagButton)
         tagButton.setOnClickListener {
-            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            val intent = Intent(this@MainActivity, TagActivity::class.java)
             startActivity(intent)
         }
 
