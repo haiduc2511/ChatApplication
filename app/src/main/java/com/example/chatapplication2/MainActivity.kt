@@ -14,6 +14,8 @@ import com.example.chatapplication2.activitytest.BookTagActivity
 import com.example.chatapplication2.activitytest.GroupActivity
 import com.example.chatapplication2.activitytest.GroupChatActivity
 import com.example.chatapplication2.activitytest.GroupEntryRequestActivity
+import com.example.chatapplication2.activitytest.GroupUserCommentActivity
+import com.example.chatapplication2.activitytest.GroupUserMessageActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,12 +58,12 @@ class MainActivity : AppCompatActivity() {
         }
         var groupUserCommentButton: Button = findViewById(R.id.groupUserCommentButton)
         groupUserCommentButton.setOnClickListener {
-            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            val intent = Intent(this@MainActivity, GroupUserCommentActivity::class.java)
             startActivity(intent)
         }
         var groupUserMessageButton: Button = findViewById(R.id.groupUserMessageButton)
         groupUserMessageButton.setOnClickListener {
-            val intent = Intent(this@MainActivity, BookActivity::class.java)
+            val intent = Intent(this@MainActivity, GroupUserMessageActivity::class.java)
             startActivity(intent)
         }
         var groupUserReadingProcessButton: Button = findViewById(R.id.groupUserReadingProcessButton)

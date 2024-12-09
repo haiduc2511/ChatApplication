@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText for Message ID -->
+    <EditText
+        android:id="@+id/etMessageId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Message ID (for update/delete)"
+        android:inputType="text" />
+
+    <!-- EditText for Group Chat ID -->
+    <EditText
+        android:id="@+id/etGroupChatId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Group Chat ID"
+        android:inputType="text" />
+
+    <!-- EditText for Group User ID -->
+    <EditText
+        android:id="@+id/etGroupUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Group User ID"
+        android:inputType="text" />
+
+    <!-- EditText for Message Text -->
+    <EditText
+        android:id="@+id/etMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Message"
+        android:inputType="text" />
+
+    <!-- EditText for Reply Message ID -->
+    <EditText
+        android:id="@+id/etReplyMessageId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Reply Message ID"
+        android:inputType="text" />
+
+    <!-- Button to Add Message -->
+    <Button
+        android:id="@+id/btnAddMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Message" />
+
+    <!-- Button to Get All Messages -->
+    <Button
+        android:id="@+id/btnGetMessages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Messages" />
+
+    <!-- Button to Update Message -->
+    <Button
+        android:id="@+id/btnUpdateMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Message" />
+
+    <!-- Button to Delete Message -->
+    <Button
+        android:id="@+id/btnDeleteMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Message" />
+
+</LinearLayout>
