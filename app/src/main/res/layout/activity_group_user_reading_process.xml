@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText for Process ID -->
+    <EditText
+        android:id="@+id/etProcessId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Process ID (for update/delete)"
+        android:inputType="text" />
+
+    <!-- EditText for Reading Process -->
+    <EditText
+        android:id="@+id/etReadingProcess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Reading Process"
+        android:inputType="text" />
+
+    <!-- EditText for Timestamp -->
+    <EditText
+        android:id="@+id/etTimeStamp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Timestamp"
+        android:inputType="text" />
+
+    <!-- Button to Add Process -->
+    <Button
+        android:id="@+id/btnAddProcess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Process" />
+
+    <!-- Button to Get All Processes -->
+    <Button
+        android:id="@+id/btnGetProcesses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Processes" />
+
+    <!-- Button to Update Process -->
+    <Button
+        android:id="@+id/btnUpdateProcess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Process" />
+
+    <!-- Button to Delete Process -->
+    <Button
+        android:id="@+id/btnDeleteProcess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Process" />
+
+</LinearLayout>
