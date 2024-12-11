@@ -1,39 +1,56 @@
 package com.example.chatapplication2.authactivity
 
 import android.os.Bundle
-import com.example.chatapplication2.R
-
-import android.content.Intent
-import android.widget.Button
-import android.widget.EditText
+import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.chatapplication2.viewmodel.AuthViewModel
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.chatapplication2.R
+import com.example.chatapplication2.databinding.ActivityRegisterBinding
+import com.example.chatapplication2.model.User
+import com.example.chatapplication2.repo.AuthRepository
+import com.example.chatapplication2.utils.FirebaseHelper
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var viewModel: AuthViewModel
-
+    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var authRepository: AuthRepository
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        this.enableEdgeToEdge()
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.getRoot())
+        authRepository = AuthRepository()
+        initUI()
+    }
 
-        viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
-
-        findViewById<Button>(R.id.registerButton).setOnClickListener {
-            val email = findViewById<EditText>(R.id.emailInput).text.toString()
-            val password = findViewById<EditText>(R.id.passwordInput).text.toString()
-            val name = findViewById<EditText>(R.id.nameInput).text.toString()
-
-            viewModel.registerUser(email, password, name) { success, message ->
-                if (success) {
-                    Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    finish()
-                } else {
-                    Toast.makeText(this, "Registration failed: $message", Toast.LENGTH_SHORT).show()
+    private fun initUI() {
+        binding.fabRegisterBack.setOnClickListener { onBackPressed() }
+        binding.btRegister.setOnClickListener {
+            val email: String = binding.etEmail.getText().toString().trim()
+            val password: String = binding.etPassword.getText().toString().trim()
+            val name: String = binding.etUsername.getText().toString().trim()
+            if (binding.etPasswordConfirm.text.toString() == password) {
+                authRepository.registerUser(email, password, name) { isSuccess, errorMessage ->
+                    if (isSuccess) {
+                        Log.d("RegisterUser", "Registration successful")
+                        // Navigate to another screen or provide feedback to the user
+                    } else {
+                        Log.w("RegisterUser", "Registration failed: $errorMessage")
+                        // Show an error message to the user
+                    }
                 }
+            } else {
+                Log.w("RegisterUser", "Passwords do not match")
+                // Handle password mismatch (e.g., show a Toast)
             }
         }
+        binding.ibRegisterGoogle.setOnClickListener { v -> }
     }
+
+
 }
