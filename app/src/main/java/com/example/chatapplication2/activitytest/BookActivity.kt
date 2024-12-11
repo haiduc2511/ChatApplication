@@ -17,6 +17,7 @@ import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
 import com.example.chatapplication2.databinding.ActivityBookBinding
 import com.example.chatapplication2.model.Book
+import com.example.chatapplication2.model.GroupEntryRequest
 import com.example.chatapplication2.viewmodel.BookViewModel
 
 class BookActivity : AppCompatActivity() {
@@ -62,6 +63,27 @@ class BookActivity : AppCompatActivity() {
         // Get Books button click listener
         binding.btnGetBooks.setOnClickListener {
             bookViewModel.getBooks()
+        }
+
+        binding.btnUpdateBook.setOnClickListener {
+            val requestId = binding.etBookId.text.toString()
+            val newBook = Book(
+                bookTitle = binding.etBookTitle.text.toString(),
+                userUploadId = "user123", // Example user ID
+                bookSummary = binding.etBookSummary.text.toString(),
+                fileBookLink = binding.etFileBookLink.text.toString(),
+                authorName = binding.etAuthorName.text.toString()
+            )
+            bookViewModel.updateBook(requestId, newBook)
+        }
+
+        // Delete Group Entry Request button click listener
+        binding.btnDeleteBook.setOnClickListener {
+            val requestId = binding.etBookId.text.toString()
+            bookViewModel.deleteBook(requestId)
+        }
+        binding.imageView4.setOnClickListener {
+            openFileChooser()
         }
     }
     private fun checkPermissions() {
