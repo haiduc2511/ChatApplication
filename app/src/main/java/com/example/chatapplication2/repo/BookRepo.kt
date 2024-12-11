@@ -1,15 +1,20 @@
 package com.example.chatapplication2.repo
 
+import android.content.ContentResolver
+import android.net.Uri
+import com.cloudinary.android.MediaManager
+import com.cloudinary.android.callback.UploadCallback
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.utils.FirebaseHelper
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import java.util.Objects
 
 class BookRepo {
 
     private val COLLECTION_NAME = "books"
     private val db = FirebaseHelper.instance!!.db
+    private val myUserId: String = FirebaseHelper.instance!!.auth.currentUser!!.uid
 
     // Add a new book to Firebase
     fun addBook(book: Book, onCompleteListener: OnCompleteListener<Void>) {
@@ -42,4 +47,20 @@ class BookRepo {
         db.collection(COLLECTION_NAME).document(id).delete()
             .addOnCompleteListener(onCompleteListener)
     }
+
+    fun uploadBookCoverCloudinary(
+        imageUri: Uri?,
+        uploadCallback: UploadCallback?,
+    ) {
+        val imageId = System.currentTimeMillis().toString() + myUserId
+        val options: MutableMap<String, Any> = HashMap()
+        options["format"] = "jpg"
+        options["folder"] = "meme_storage/images"
+        options["public_id"] = imageId
+        MediaManager.get().upload(imageUri)
+            .unsigned("your_unsigned_preset")
+            .options(options)
+            .callback(uploadCallback).dispatch()
+    }
+
 }

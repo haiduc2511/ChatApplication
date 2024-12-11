@@ -1,16 +1,16 @@
 package com.example.chatapplication2.viewmodel
 
+import android.app.Application
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.cloudinary.android.callback.UploadCallback
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.repo.BookRepo
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 
 class BookViewModel : ViewModel() {
 
@@ -93,4 +93,11 @@ class BookViewModel : ViewModel() {
             }
         })
     }
+    fun uploadBookCoverCloudinary(imageUri: Uri?, uploadCallback: UploadCallback?) {
+        bookRepo.uploadBookCoverCloudinary(
+            imageUri,
+            uploadCallback
+        )
+    }
+
 }
