@@ -2,26 +2,15 @@ package com.example.chatapplication2
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.chatapplication2.authactivity.LoginActivity
-import com.example.chatapplication2.authactivity.RegisterActivity
-import com.example.chatapplication2.activitytest.BookActivity
-import com.example.chatapplication2.activitytest.BookTagActivity
-import com.example.chatapplication2.activitytest.GroupActivity
-import com.example.chatapplication2.activitytest.GroupChatActivity
-import com.example.chatapplication2.activitytest.GroupEntryRequestActivity
-import com.example.chatapplication2.activitytest.GroupUserActivity
-import com.example.chatapplication2.activitytest.GroupUserCommentActivity
-import com.example.chatapplication2.activitytest.GroupUserMessageActivity
-import com.example.chatapplication2.activitytest.GroupUserReadingProcessActivity
-import com.example.chatapplication2.activitytest.TagActivity
+import com.cloudinary.android.MediaManager
 import com.example.chatapplication2.adapter.GroupAdapter
 import com.example.chatapplication2.databinding.ActivityMainBinding
+import com.example.chatapplication2.utils.MediaManagerState
 import com.example.chatapplication2.viewmodel.GroupViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initCloudinary()
 
         binding.button.setOnClickListener {
             val intent = Intent(this@MainActivity, TestMainActivity::class.java)
@@ -57,4 +47,18 @@ class MainActivity : AppCompatActivity() {
         // Fetch sample groups
         groupViewModel.getGroups()
     }
+
+    private fun initCloudinary() {
+        if (!MediaManagerState.isInitialized) {
+            val config: MutableMap<String?, Any?> = HashMap()
+            config["cloud_name"] = BuildConfig.CLOUD_NAME
+            config["api_key"] = BuildConfig.API_KEY
+            config["api_secret"] = BuildConfig.API_SECRET
+            //        config.put("secure", true);
+            MediaManager.init(this, config)
+            MediaManagerState.initialize()
+        }
+    }
+
+
 }

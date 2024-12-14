@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
 import com.example.chatapplication2.databinding.ActivityBookBinding
@@ -157,6 +158,8 @@ class BookActivity : AppCompatActivity() {
 
             override fun onSuccess(requestId: String, resultData: Map<*, *>) {
                 val imageUrl = (resultData["secure_url"] as String?)!!
+                binding.etFileBookLink.setText(imageUrl)
+                Glide.with(this@BookActivity).asBitmap().load(imageUrl).into(binding.imageView4)
                 Log.d(ContentValues.TAG, "Upload successful. Image URL: $imageUrl")
             }
 
