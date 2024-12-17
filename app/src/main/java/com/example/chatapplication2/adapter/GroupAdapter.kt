@@ -1,5 +1,6 @@
 package com.example.chatapplication2.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,11 @@ class GroupAdapter(private val groups: List<Group>) : RecyclerView.Adapter<Group
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.itemText = groups[position].groupName
+        holder.binding.tvGroupName.setText("${groups[position].groupName}")
+        holder.binding.tvBookName.setText("${groups[position].bookId}")
+
+        Log.d("duma groupName", groups[position].groupName)
+        Log.d("duma privacyMode", groups[position].privacyMode)
     }
 
     override fun getItemCount(): Int = groups.size

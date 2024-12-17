@@ -29,9 +29,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
+        binding.ibSearch.setOnClickListener {
+//            Toast.makeText(this, "duma", Toast.LENGTH_SHORT).show()
+            groupViewModel.getGroups()
+        }
 
         // Observe the groupsLiveData
         groupViewModel.groupsLiveData.observe(this, Observer { groups ->
+            Toast.makeText(this, "co modification", Toast.LENGTH_SHORT).show()
+
             val adapter = GroupAdapter(groups)
             binding.recyclerView.adapter = adapter
         })

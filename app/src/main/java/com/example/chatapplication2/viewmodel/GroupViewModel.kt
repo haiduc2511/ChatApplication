@@ -1,5 +1,6 @@
 package com.example.chatapplication2.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -38,6 +39,10 @@ class GroupViewModel : ViewModel() {
             override fun onComplete(task: Task<QuerySnapshot>) {
                 if (task.isSuccessful) {
                     val groups = task.result?.toObjects(Group::class.java) ?: emptyList()
+                    for (j in 0..groups.size - 1) {
+                        Log.d("test", groups[j].toString())
+                    }
+
                     _groupsLiveData.postValue(groups)
                 } else {
                     _errorLiveData.postValue("Error: ${task.exception?.message}")
