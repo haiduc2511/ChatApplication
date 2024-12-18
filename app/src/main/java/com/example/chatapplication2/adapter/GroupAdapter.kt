@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.chatapplication2.databinding.ItemGroupBinding
+import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
 
-class GroupAdapter(private val groups: List<Group>) : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
+class GroupAdapter(private val groups: List<Group>,
+                   private val books: HashMap<String, Book>
+    ) : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemGroupBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -21,8 +25,9 @@ class GroupAdapter(private val groups: List<Group>) : RecyclerView.Adapter<Group
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvGroupName.setText("${groups[position].groupName}")
-        holder.binding.tvBookName.setText("${groups[position].bookId}")
-
+        val book = books.get("${groups[position].bookId}")
+        holder.binding.tvBookName.setText(book!!.bookTitle)
+        Glide.with(holder.itemView.context).asBitmap().load(book.fileBookLink).into(holder.binding.ivBookCover)
         Log.d("duma groupName", groups[position].groupName)
         Log.d("duma privacyMode", groups[position].privacyMode)
     }

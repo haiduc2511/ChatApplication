@@ -10,12 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cloudinary.android.MediaManager
 import com.example.chatapplication2.adapter.GroupAdapter
 import com.example.chatapplication2.databinding.ActivityMainBinding
+import com.example.chatapplication2.model.Book
+import com.example.chatapplication2.model.Group
 import com.example.chatapplication2.utils.MediaManagerState
+import com.example.chatapplication2.viewmodel.BookViewModel
 import com.example.chatapplication2.viewmodel.GroupViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val groupViewModel: GroupViewModel by viewModels()
+    private val bookViewModel: BookViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,14 +35,25 @@ class MainActivity : AppCompatActivity() {
 
         binding.ibSearch.setOnClickListener {
 //            Toast.makeText(this, "duma", Toast.LENGTH_SHORT).show()
-            groupViewModel.getGroups()
+
+
+
+        }
+        groupViewModel.getGroups()
+        bookViewModel.getBooks()
+        val bookMap = HashMap<String, Book>()
+        bookViewModel.booksLiveData.observe(this) { books ->
+            // Handle the list of books, e.g., display in a RecyclerView
+            for (book in books) {
+                bookMap.put(book.bid, book);
+            }
         }
 
         // Observe the groupsLiveData
         groupViewModel.groupsLiveData.observe(this, Observer { groups ->
             Toast.makeText(this, "co modification", Toast.LENGTH_SHORT).show()
 
-            val adapter = GroupAdapter(groups)
+            val adapter = GroupAdapter(groups, bookMap)
             binding.recyclerView.adapter = adapter
         })
 
