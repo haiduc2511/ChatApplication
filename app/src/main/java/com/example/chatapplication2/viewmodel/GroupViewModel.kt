@@ -1,9 +1,11 @@
 package com.example.chatapplication2.viewmodel
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.cloudinary.android.callback.UploadCallback
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.QuerySnapshot
@@ -89,5 +91,11 @@ class GroupViewModel : ViewModel() {
                 }
             }
         })
+    }
+    fun uploadGroupPhotoCloudinary(imageUri: Uri?, uploadCallback: UploadCallback?) {
+        groupRepo.uploadBookCoverCloudinary(
+            imageUri,
+            uploadCallback
+        )
     }
 }
