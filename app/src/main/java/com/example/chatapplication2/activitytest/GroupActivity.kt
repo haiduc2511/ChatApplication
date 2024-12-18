@@ -45,6 +45,7 @@ class GroupActivity : AppCompatActivity() {
                 groupName = binding.etGroupName.text.toString(),
                 bookId = binding.etBookId.text.toString(),
                 privacyMode = binding.etPrivacyMode.text.toString(),
+                groupPhotoLink = binding.etGroupPhotoLink.text.toString(),
                 adminUserId = binding.etAdminUserId.text.toString()
             )
             groupViewModel.addGroup(newGroup)
@@ -63,6 +64,7 @@ class GroupActivity : AppCompatActivity() {
                 groupName = binding.etGroupName.text.toString(),
                 bookId = binding.etBookId.text.toString(),
                 privacyMode = binding.etPrivacyMode.text.toString(),
+                groupPhotoLink = binding.etGroupPhotoLink.text.toString(),
                 adminUserId = binding.etAdminUserId.text.toString()
             )
             groupViewModel.updateGroup(groupId, updatedGroup)

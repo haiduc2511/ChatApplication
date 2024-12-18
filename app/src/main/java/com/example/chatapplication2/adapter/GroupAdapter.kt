@@ -26,7 +26,7 @@ class GroupAdapter(private val groups: List<Group>,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvGroupName.setText("${groups[position].groupName}")
         val book = books.get("${groups[position].bookId}")
-        holder.binding.tvBookName.setText(book!!.bookTitle)
+        holder.binding.tvBookName.setText("" + book!!.bookTitle)
         Glide.with(holder.itemView.context).asBitmap().load(book.fileBookLink).into(holder.binding.ivBookCover)
         Log.d("duma groupName", groups[position].groupName)
         Log.d("duma privacyMode", groups[position].privacyMode)

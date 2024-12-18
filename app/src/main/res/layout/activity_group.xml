@@ -37,6 +37,14 @@
         android:hint="Privacy Mode"
         android:inputType="text" />
 
+    <!-- EditText for groupPhotoLink -->
+    <EditText
+        android:id="@+id/etGroupPhotoLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Group Photo Link"
+        android:inputType="text" />
+
     <!-- EditText for Admin User ID -->
     <EditText
         android:id="@+id/etAdminUserId"

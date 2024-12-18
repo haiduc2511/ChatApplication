@@ -65,8 +65,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        // Fetch sample groups
-        groupViewModel.getGroups()
     }
 
     private fun initCloudinary() {
