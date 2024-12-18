@@ -84,8 +84,12 @@ class BookActivity : AppCompatActivity() {
             bookViewModel.deleteBook(requestId)
         }
         binding.imageView4.setOnClickListener {
-            openFileChooser()
+            openImageChooser()
         }
+        binding.imageView5.setOnClickListener {
+            openPdfChooser()
+        }
+
     }
     private fun checkPermissions() {
         if (ContextCompat.checkSelfPermission(
@@ -117,13 +121,25 @@ class BookActivity : AppCompatActivity() {
         }
     }
     val PICK_IMAGES_REQUEST = 1
-    private fun openFileChooser() {
+    val PICK_PDF_REQUEST = 2
+    private fun openImageChooser() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-        intent.setType("image/*")
+        intent.setType("images/*")
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.addCategory(Intent.CATEGORY_OPENABLE) // Ensure files can be opened
         startActivityForResult(
-            Intent.createChooser(intent, "Select Pictures"),
+            Intent.createChooser(intent, "Select images"),
             PICK_IMAGES_REQUEST
+        )
+    }
+    private fun openPdfChooser() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        intent.setType("application/pdf")
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.addCategory(Intent.CATEGORY_OPENABLE) // Ensure files can be opened
+        startActivityForResult(
+            Intent.createChooser(intent, "Select PDF Files"),
+            PICK_PDF_REQUEST
         )
     }
 
@@ -147,6 +163,29 @@ class BookActivity : AppCompatActivity() {
                 uploadBookCoverToCloudinary(uri)
             }
         }
+
+        if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK) {
+            if (data != null) {
+                val uriList: MutableList<Uri?> = ArrayList()
+
+                if (data.clipData != null) { // Multiple PDFs selected
+                    val count = data.clipData!!.itemCount
+                    for (i in 0 until count) {
+                        val pdfUri = data.clipData!!.getItemAt(i).uri
+                        Log.d("PDF_URI", pdfUri.toString())
+                        uriList.add(pdfUri)
+                    }
+                    uri = uriList[0]!!
+                } else if (data.data != null) { // Single PDF selected
+                    val pdfUri = data.data
+                    uri = pdfUri!!
+                }
+
+                // Example function to handle the PDF upload or processing
+                uploadPdfToCloudinary(uri)
+            }
+        }
+
     }
     private fun uploadBookCoverToCloudinary(uri: Uri) {
         bookViewModel.uploadBookCoverCloudinary(uri, object : UploadCallback {
@@ -169,5 +208,24 @@ class BookActivity : AppCompatActivity() {
             override fun onReschedule(requestId: String, error: ErrorInfo) {}
         })
     }
+    private fun uploadPdfToCloudinary(uri: Uri) {
+        bookViewModel.uploadPdfToCloudinary(uri, object : UploadCallback {
+            override fun onStart(requestId: String) {
+            }
 
+            override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {
+            }
+
+            override fun onSuccess(requestId: String, resultData: Map<*, *>) {
+                val pdfUrl = (resultData["secure_url"] as String?)!!
+                binding.etFileBookLink.setText(pdfUrl)
+                Log.d(ContentValues.TAG, "Upload successful. pdf URL: $pdfUrl")
+            }
+
+            override fun onError(requestId: String, error: ErrorInfo) {
+            }
+
+            override fun onReschedule(requestId: String, error: ErrorInfo) {}
+        })
+    }
 }

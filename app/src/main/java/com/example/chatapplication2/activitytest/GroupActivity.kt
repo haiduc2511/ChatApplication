@@ -88,6 +88,9 @@ class GroupActivity : AppCompatActivity() {
             groupViewModel.deleteGroup(groupId)
         }
 
+        binding.imageView4.setOnClickListener {
+            openFileChooser()
+        }
 
 
     }

@@ -55,9 +55,23 @@ class BookRepo {
         val imageId = System.currentTimeMillis().toString() + myUserId
         val options: MutableMap<String, Any> = HashMap()
         options["format"] = "jpg"
-        options["folder"] = "meme_storage/images"
+        options["folder"] = "bookCover"
         options["public_id"] = imageId
         MediaManager.get().upload(imageUri)
+            .unsigned("your_unsigned_preset")
+            .options(options)
+            .callback(uploadCallback).dispatch()
+    }
+    fun uploadPdfToCloudinary(
+        pdfUri: Uri?,
+        uploadCallback: UploadCallback?,
+    ) {
+        val imageId = System.currentTimeMillis().toString() + myUserId
+        val options: MutableMap<String, Any> = HashMap()
+        options["format"] = "pdf"
+        options["folder"] = "bookPdf"
+        options["public_id"] = imageId
+        MediaManager.get().upload(pdfUri)
             .unsigned("your_unsigned_preset")
             .options(options)
             .callback(uploadCallback).dispatch()

@@ -99,5 +99,11 @@ class BookViewModel : ViewModel() {
             uploadCallback
         )
     }
+    fun uploadPdfToCloudinary(pdfUri: Uri?, uploadCallback: UploadCallback?) {
+        bookRepo.uploadPdfToCloudinary(
+            pdfUri,
+            uploadCallback
+        )
+    }
 
 }

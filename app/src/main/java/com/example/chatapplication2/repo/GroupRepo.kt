@@ -47,14 +47,14 @@ class GroupRepo {
             .addOnCompleteListener(onCompleteListener)
     }
 
-    fun uploadBookCoverCloudinary(
+    fun uploadGroupPhotoCloudinary(
         imageUri: Uri?,
         uploadCallback: UploadCallback?,
     ) {
         val imageId = System.currentTimeMillis().toString() + myUserId
         val options: MutableMap<String, Any> = HashMap()
         options["format"] = "jpg"
-        options["folder"] = "meme_storage/images"
+        options["folder"] = "groupPhoto"
         options["public_id"] = imageId
         MediaManager.get().upload(imageUri)
             .unsigned("your_unsigned_preset")

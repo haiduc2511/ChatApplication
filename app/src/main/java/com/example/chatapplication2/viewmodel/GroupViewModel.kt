@@ -93,7 +93,7 @@ class GroupViewModel : ViewModel() {
         })
     }
     fun uploadGroupPhotoCloudinary(imageUri: Uri?, uploadCallback: UploadCallback?) {
-        groupRepo.uploadBookCoverCloudinary(
+        groupRepo.uploadGroupPhotoCloudinary(
             imageUri,
             uploadCallback
         )
