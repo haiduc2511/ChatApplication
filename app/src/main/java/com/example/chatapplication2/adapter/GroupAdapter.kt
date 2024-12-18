@@ -28,8 +28,8 @@ class GroupAdapter(private val groups: List<Group>,
         val book = books.get("${groups[position].bookId}")
         if (book != null) {
             holder.binding.tvBookName.setText("" + book!!.bookTitle)
-            Glide.with(holder.itemView.context).asBitmap().load(book.fileBookLink).into(holder.binding.ivBookCover)
         }
+        Glide.with(holder.itemView.context).asBitmap().load(groups[position].groupPhotoLink).into(holder.binding.ivBookCover)
         Log.d("duma groupName", groups[position].groupName)
         Log.d("duma privacyMode", groups[position].privacyMode)
     }
