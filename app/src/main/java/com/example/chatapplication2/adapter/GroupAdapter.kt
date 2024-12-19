@@ -1,5 +1,6 @@
 package com.example.chatapplication2.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.chatapplication2.activityreal.ReadActivity
 import com.example.chatapplication2.databinding.ItemGroupBinding
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
@@ -32,6 +34,12 @@ class GroupAdapter(private val groups: List<Group>,
         Glide.with(holder.itemView.context).asBitmap().load(groups[position].groupPhotoLink).into(holder.binding.ivBookCover)
         Log.d("duma groupName", groups[position].groupName)
         Log.d("duma privacyMode", groups[position].privacyMode)
+
+        holder.itemView.setOnClickListener {
+            val intent: Intent = Intent(it.context, ReadActivity::class.java).apply {
+                it.context.startActivity(this)
+            }
+        }
     }
 
     override fun getItemCount(): Int = groups.size

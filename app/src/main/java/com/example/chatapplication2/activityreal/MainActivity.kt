@@ -1,4 +1,4 @@
-package com.example.chatapplication2
+package com.example.chatapplication2.activityreal
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,13 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cloudinary.android.MediaManager
+import com.example.chatapplication2.BuildConfig
+import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.GroupAdapter
 import com.example.chatapplication2.databinding.ActivityMainBinding
 import com.example.chatapplication2.model.Book
-import com.example.chatapplication2.model.Group
 import com.example.chatapplication2.utils.MediaManagerState
 import com.example.chatapplication2.viewmodel.BookViewModel
 import com.example.chatapplication2.viewmodel.GroupViewModel
+import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -77,6 +79,24 @@ class MainActivity : AppCompatActivity() {
             MediaManager.init(this, config)
             MediaManagerState.initialize()
         }
+    }
+    private fun initBottomNavigation() {
+        binding.bnMain.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { menuItem ->
+            val id = menuItem.itemId
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            if (R.id.nav_profile === id) {
+            }
+            if (R.id.nav_home === id) {
+            }
+            if (R.id.nav_search === id) {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Chưa phát triển tính năng này hêh",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            true
+        })
     }
 
 

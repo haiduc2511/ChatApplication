@@ -84,5 +84,6 @@ dependencies {
 
     implementation(platform(libs.firebase.bom)) // Firebase BoM
     implementation(libs.play.services.auth) // Google Sign-In
+    implementation("com.github.DImuthuUpe:AndroidPdfViewer:3.1.0-beta.1")
 
 }

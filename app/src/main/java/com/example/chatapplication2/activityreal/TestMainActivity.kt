@@ -1,12 +1,10 @@
-package com.example.chatapplication2
+package com.example.chatapplication2.activityreal
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.chatapplication2.R
 import com.example.chatapplication2.activitytest.BookActivity
 import com.example.chatapplication2.activitytest.BookTagActivity
 import com.example.chatapplication2.activitytest.GroupActivity
