@@ -37,6 +37,7 @@ class GroupAdapter(private val groups: List<Group>,
 
         holder.itemView.setOnClickListener {
             val intent: Intent = Intent(it.context, ReadActivity::class.java).apply {
+                putExtra("group", groups[position]) // Replace "key_name" and "YourStringValue" with your key and value
                 it.context.startActivity(this)
             }
         }
