@@ -15,6 +15,7 @@ import com.example.chatapplication2.activitytest.GroupUserCommentActivity
 import com.example.chatapplication2.activitytest.GroupUserMessageActivity
 import com.example.chatapplication2.activitytest.GroupUserReadingProcessActivity
 import com.example.chatapplication2.activitytest.TagActivity
+import com.example.chatapplication2.activitytest.UserPostActivity
 import com.example.chatapplication2.authactivity.LoginActivity
 import com.example.chatapplication2.authactivity.RegisterActivity
 
@@ -80,6 +81,11 @@ class TestMainActivity : AppCompatActivity() {
         var tagButton: Button = findViewById(R.id.tagButton)
         tagButton.setOnClickListener {
             val intent = Intent(this@TestMainActivity, TagActivity::class.java)
+            startActivity(intent)
+        }
+        var userPostButton: Button = findViewById(R.id.userPostButton)
+        userPostButton.setOnClickListener {
+            val intent = Intent(this@TestMainActivity, UserPostActivity::class.java)
             startActivity(intent)
         }
 

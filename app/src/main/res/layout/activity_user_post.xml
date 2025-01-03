@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText for Post ID -->
+    <EditText
+        android:id="@+id/etPostId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Post ID (for update/delete)"
+        android:inputType="text" />
+
+    <!-- EditText for Group ID -->
+    <EditText
+        android:id="@+id/etGroupId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Group ID"
+        android:inputType="text" />
+
+    <!-- EditText for User ID -->
+    <EditText
+        android:id="@+id/etUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="User ID"
+        android:inputType="text" />
+
+    <!-- EditText for Image Post URL -->
+    <EditText
+        android:id="@+id/etImagePost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Image Post URL"
+        android:inputType="text" />
+
+    <!-- EditText for Caption Post -->
+    <EditText
+        android:id="@+id/etCaptionPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Caption Post"
+        android:inputType="text" />
+
+    <!-- Button to Add Post -->
+    <Button
+        android:id="@+id/btnAddPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Post" />
+
+    <!-- Button to Get All Posts -->
+    <Button
+        android:id="@+id/btnGetPosts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Posts" />
+
+    <!-- Button to Update Post -->
+    <Button
+        android:id="@+id/btnUpdatePost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Post" />
+
+    <!-- Button to Delete Post -->
+    <Button
+        android:id="@+id/btnDeletePost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Post" />
+
+</LinearLayout>
