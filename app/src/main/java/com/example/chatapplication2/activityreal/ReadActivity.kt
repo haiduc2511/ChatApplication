@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.chatapplication2.R
 import com.example.chatapplication2.databinding.ActivityReadBinding
+import com.example.chatapplication2.model.Group
 import com.github.barteksc.pdfviewer.listener.OnLongPressListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
 import com.github.barteksc.pdfviewer.listener.OnTapListener
@@ -29,6 +30,8 @@ class ReadActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val group: Group? = intent.getParcelableExtra("group")
+        binding.tvChooseUri.setText(group.toString())
         binding.tvChooseUri.setOnClickListener { v -> openFileChooser() }
     }
 
@@ -55,7 +58,7 @@ class ReadActivity : AppCompatActivity() {
 
     private fun openPdf(uri: Uri?) {
         binding.pdfView.fromUri(uri) //                .pages(1,1,1,1,10)
-            //                .swipeHorizontal(true)
+            .swipeHorizontal(true)
             .pageSnap(true) //                .autoSpacing(true)
             .pageFling(true)
             .onTap(OnTapListener { //                        Toast.makeText(MainActivity.this, e.getX() + " " + e.getY(), Toast.LENGTH_SHORT).show();
