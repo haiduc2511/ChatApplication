@@ -28,12 +28,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initCloudinary()
 
-        binding.button.setOnClickListener {
+        binding.ibSearch.setOnClickListener {
             val intent = Intent(this@MainActivity, TestMainActivity::class.java)
             startActivity(intent)
         }
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvBookRecommendList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         binding.ibSearch.setOnClickListener {
 //            Toast.makeText(this, "duma", Toast.LENGTH_SHORT).show()
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "co modification", Toast.LENGTH_SHORT).show()
 
             val adapter = GroupAdapter(groups, bookMap)
-            binding.recyclerView.adapter = adapter
+            binding.rvBookRecommendList.adapter = adapter
         })
 
         // Observe errorLiveData for errors
