@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initCloudinary()
 
-        binding.ibSearch.setOnClickListener {
+        binding.imageView2.setOnClickListener {
             val intent = Intent(this@MainActivity, TestMainActivity::class.java)
             startActivity(intent)
         }
@@ -36,9 +36,8 @@ class MainActivity : AppCompatActivity() {
         binding.rvBookRecommendList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         binding.ibSearch.setOnClickListener {
-//            Toast.makeText(this, "duma", Toast.LENGTH_SHORT).show()
-
-
+            val intent = Intent(this@MainActivity, ChatActivity::class.java)
+            startActivity(intent)
 
         }
         groupViewModel.getGroups()
