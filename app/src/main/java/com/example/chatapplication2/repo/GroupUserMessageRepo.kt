@@ -4,6 +4,7 @@ import com.example.chatapplication2.model.GroupUserMessage
 import com.example.chatapplication2.utils.FirebaseHelper
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 
 class GroupUserMessageRepo {
@@ -13,7 +14,7 @@ class GroupUserMessageRepo {
 
     // Add a new group user message to Firebase
     fun addGroupUserMessage(message: GroupUserMessage, onCompleteListener: OnCompleteListener<Void>) {
-        val id = db.collection(COLLECTION_NAME).document().id // Generate a new ID
+        val id = System.currentTimeMillis().toString() + db.collection(COLLECTION_NAME).document().id // Generate a new ID
         val messageWithId = message.copy(gumid = id) // Add generated ID to the message object
         db.collection(COLLECTION_NAME).document(id).set(messageWithId)
             .addOnCompleteListener(onCompleteListener)
@@ -42,4 +43,23 @@ class GroupUserMessageRepo {
         db.collection(COLLECTION_NAME).document(id).delete()
             .addOnCompleteListener(onCompleteListener)
     }
+    fun listenToGroupUserMessages(groupChatId: String, callback: (List<GroupUserMessage>?, String?) -> Unit) {
+        db.collection(COLLECTION_NAME)
+            .whereEqualTo("groupChatId", groupChatId)
+            .orderBy("gumid", Query.Direction.ASCENDING)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    callback(null, error.message)
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null) {
+                    val messages = snapshot.toObjects(GroupUserMessage::class.java)
+                    callback(messages, null)
+                } else {
+                    callback(emptyList(), null)
+                }
+            }
+    }
+
 }

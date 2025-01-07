@@ -35,9 +35,14 @@ class ChatActivity : AppCompatActivity() {
         recyclerViewMessages.layoutManager = LinearLayoutManager(this)
         recyclerViewMessages.adapter = adapter
 
+        viewModel.fetchGroupUserMessages("group_123")
+
+        // Observe messages
         viewModel.groupUserMessagesLiveData.observe(this) { messages ->
             adapter.submitList(messages)
+            recyclerViewMessages.scrollToPosition(adapter.itemCount - 1)
         }
+
 
         buttonSend.setOnClickListener {
             val messageText = editTextMessage.text.toString()

@@ -1,4 +1,5 @@
 package com.example.chatapplication2.viewmodel
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -82,5 +83,15 @@ class GroupUserMessageViewModel : ViewModel() {
                 }
             }
         })
+    }
+
+    fun fetchGroupUserMessages(groupChatId: String) {
+        groupUserMessageRepo.listenToGroupUserMessages(groupChatId) { messages, error ->
+            if (messages != null) {
+                _groupUserMessagesLiveData.postValue(messages!!)
+            } else {
+                Log.e("GroupUserMessageVM", "Error fetching messages: $error")
+            }
+        }
     }
 }
