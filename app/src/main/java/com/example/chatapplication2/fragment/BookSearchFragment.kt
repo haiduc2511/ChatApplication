@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import androidx.fragment.app.viewModels
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
@@ -33,6 +34,7 @@ class BookSearchFragment : Fragment() {
         val adapter = BookSearchAdapter()
         recyclerView.adapter = adapter
 
+        viewModel.getBooks()
         // Observe LiveData
         viewModel.booksLiveData.observe(viewLifecycleOwner) { books ->
             adapter.submitList(books)

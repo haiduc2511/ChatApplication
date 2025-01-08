@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.GroupAdapter
 import com.example.chatapplication2.adapter.GroupSearchAdapter
+import com.example.chatapplication2.viewmodel.BookViewModel
 import com.example.chatapplication2.viewmodel.GroupViewModel
 
 class GroupSearchFragment : Fragment() {
@@ -33,6 +36,7 @@ class GroupSearchFragment : Fragment() {
 
         val adapter = GroupSearchAdapter()
         recyclerView.adapter = adapter
+        viewModel.getGroups()
 
         // Observe LiveData
         viewModel.groupsLiveData.observe(viewLifecycleOwner) { groups ->
