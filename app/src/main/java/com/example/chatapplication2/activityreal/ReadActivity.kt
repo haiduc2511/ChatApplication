@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.chatapplication2.R
 import com.example.chatapplication2.databinding.ActivityReadBinding
+import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
 import com.github.barteksc.pdfviewer.listener.OnLongPressListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
@@ -31,6 +32,11 @@ class ReadActivity : AppCompatActivity() {
             insets
         }
         val group: Group? = intent.getParcelableExtra("group")
+        val book: Book? = intent.getParcelableExtra("book") //
+        //TODO: chỉ tạo group khi đã có book nha, cần tạo search book khi tạo group đã
+        val uri: Uri = Uri.parse(book!!.fileBookLink)
+        openPdf(uri)
+
         binding.tvChooseUri.setText(group.toString())
         binding.tvChooseUri.setOnClickListener { v -> openFileChooser() }
     }
@@ -57,7 +63,8 @@ class ReadActivity : AppCompatActivity() {
     }
 
     private fun openPdf(uri: Uri?) {
-        binding.pdfView.fromUri(uri) //                .pages(1,1,1,1,10)
+        binding.pdfView
+            .fromUri(uri) //                .pages(1,1,1,1,10)
             .swipeHorizontal(true)
             .pageSnap(true) //                .autoSpacing(true)
             .pageFling(true)

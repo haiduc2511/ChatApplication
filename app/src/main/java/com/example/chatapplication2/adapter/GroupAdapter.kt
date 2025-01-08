@@ -36,8 +36,9 @@ class GroupAdapter(private val groups: List<Group>,
         Log.d("duma privacyMode", groups[position].privacyMode)
 
         holder.itemView.setOnClickListener {
-            val intent: Intent = Intent(it.context, ReadActivity::class.java).apply {
+            Intent(it.context, ReadActivity::class.java).apply {
                 putExtra("group", groups[position]) // Replace "key_name" and "YourStringValue" with your key and value
+                putExtra("book", book)
                 it.context.startActivity(this)
             }
         }

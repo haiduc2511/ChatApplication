@@ -119,12 +119,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="88dp" />
+        app:layout_constraintGuide_begin="68dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_book_recommend_list"
         android:layout_width="0dp"
-        android:layout_height="320dp"
+        android:layout_height="300dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/bn_main"
         app:layout_constraintEnd_toEndOf="parent"

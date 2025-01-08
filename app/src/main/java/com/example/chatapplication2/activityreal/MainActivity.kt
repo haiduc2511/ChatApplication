@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initCloudinary()
+        initBottomNavigation()
 
         binding.imageView2.setOnClickListener {
             val intent = Intent(this@MainActivity, TestMainActivity::class.java)
@@ -88,11 +89,8 @@ class MainActivity : AppCompatActivity() {
             if (R.id.nav_home === id) {
             }
             if (R.id.nav_search === id) {
-                Toast.makeText(
-                    this@MainActivity,
-                    "Chưa phát triển tính năng này hêh",
-                    Toast.LENGTH_SHORT
-                ).show()
+                val intent = Intent(this@MainActivity, SearchActivity::class.java)
+                startActivity(intent)
             }
             true
         })
