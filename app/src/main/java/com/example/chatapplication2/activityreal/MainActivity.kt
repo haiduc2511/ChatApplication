@@ -2,6 +2,7 @@ package com.example.chatapplication2.activityreal
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -58,6 +59,8 @@ class MainActivity : AppCompatActivity() {
             val adapter = GroupAdapter(groups, bookMap)
             binding.rvBookRecommendList.adapter = adapter
         })
+
+        Log.d("duma", bookMap.toString() + "\n" + groupViewModel.getGroups().toString())
 
         // Observe errorLiveData for errors
         groupViewModel.errorLiveData.observe(this, Observer { error ->

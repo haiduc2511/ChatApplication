@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.BookSearchAdapter
+import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.viewmodel.BookViewModel
 
 class BookSearchFragment : Fragment() {
@@ -53,6 +56,13 @@ class BookSearchFragment : Fragment() {
                 return false
             }
         })
+        var imageView3: ImageView = view.findViewById(R.id.imageView3)
+        imageView3.setOnClickListener {
+            val book: Book = adapter.currentList.get(0)
+            Glide.with(this)
+                .load(book.fileBookLink)
+                .into(imageView3)
+        }
 
         return view
     }

@@ -3,9 +3,11 @@ package com.example.chatapplication2.activityreal
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.chatapplication2.R
@@ -15,6 +17,15 @@ import com.example.chatapplication2.model.Group
 import com.github.barteksc.pdfviewer.listener.OnLongPressListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
 import com.github.barteksc.pdfviewer.listener.OnTapListener
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import java.net.URL
 
 
 class ReadActivity : AppCompatActivity() {
@@ -34,8 +45,7 @@ class ReadActivity : AppCompatActivity() {
         val group: Group? = intent.getParcelableExtra("group")
         val book: Book? = intent.getParcelableExtra("book") //
         //TODO: chỉ tạo group khi đã có book nha, cần tạo search book khi tạo group đã
-        val uri: Uri = Uri.parse(book!!.fileBookLink)
-        openPdf(uri)
+        downloadAndOpenPdf(book!!.fileBookLink)
 
         binding.tvChooseUri.setText(group.toString())
         binding.tvChooseUri.setOnClickListener { v -> openFileChooser() }
@@ -56,12 +66,70 @@ class ReadActivity : AppCompatActivity() {
         if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK) {
             if (data != null) {
                 val uri = data.data
-                // Use the uri to open the PDF
                 openPdf(uri)
             }
         }
     }
+    fun downloadAndOpenPdf(pdfUrl: String) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val pdfFile = withContext(Dispatchers.IO) {
+                    downloadPdfFromUrl(pdfUrl)
+                }
 
+                openPdf(Uri.fromFile(pdfFile))
+
+            } catch (e: Exception) {
+                Log.d("d", e.message.toString())
+                Toast.makeText(this@ReadActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    suspend fun downloadPdfFromUrl(url: String): File {
+        // Create a temporary file to store the PDF
+        val pdfFile = File.createTempFile("downloaded", ".pdf", cacheDir)
+
+        withContext(Dispatchers.IO) {
+            try {
+                // Open a connection to the URL
+                val connection = URL(url).openStream()
+                val output = FileOutputStream(pdfFile)
+
+                // Copy the input stream to the output file
+                connection.use { input ->
+                    output.use { outputStream ->
+                        input.copyTo(outputStream)
+                    }
+                }
+
+                // Check if the file is a valid PDF
+                if (!isPdfFile(pdfFile)) {
+                    throw IOException("File is not a valid PDF")
+                }
+
+            } catch (e: Exception) {
+                // Handle download errors
+                throw IOException("Failed to download PDF: ${e.message}")
+            }
+        }
+
+        return pdfFile
+    }
+    fun isPdfFile(file: File): Boolean {
+        return try {
+            val inputStream = FileInputStream(file)
+            val buffer = ByteArray(4)
+            inputStream.read(buffer)
+            inputStream.close()
+
+            // Check if the first 4 bytes match the PDF signature
+            val fileHeader = String(buffer)
+            fileHeader == "%PDF"
+        } catch (e: Exception) {
+            false
+        }
+    }
     private fun openPdf(uri: Uri?) {
         binding.pdfView
             .fromUri(uri) //                .pages(1,1,1,1,10)
