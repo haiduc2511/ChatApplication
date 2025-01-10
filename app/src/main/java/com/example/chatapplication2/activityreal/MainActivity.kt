@@ -16,6 +16,8 @@ import com.example.chatapplication2.BuildConfig
 import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.GroupAdapter
 import com.example.chatapplication2.databinding.ActivityMainBinding
+import com.example.chatapplication2.fragment.ChatFragment
+import com.example.chatapplication2.fragment.ReadFragment
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
 import com.example.chatapplication2.utils.MediaManagerState
@@ -120,16 +122,26 @@ class MainActivity : AppCompatActivity() {
     }
     private fun initBottomNavigation() {
         binding.bnMain.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { menuItem ->
-            val id = menuItem.itemId
             val fragmentTransaction = supportFragmentManager.beginTransaction()
-            if (R.id.nav_profile === id) {
+            when (menuItem.itemId) {
+//                R.id.nav_profile -> {
+//                    fragmentTransaction.replace(R.id.fragment_container, ProfileFragment())
+//                }
+//                R.id.nav_home -> {
+//                    fragmentTransaction.replace(R.id.fragment_container, HomeFragment())
+//                }
+                R.id.nav_read -> {
+                    fragmentTransaction.replace(R.id.fragment_container, ReadFragment())
+                }
+                R.id.nav_chat -> {
+                    fragmentTransaction.replace(R.id.fragment_container, ChatFragment())
+                }
+                R.id.nav_search -> {
+                    val intent = Intent(this@MainActivity, SearchActivity::class.java)
+                    startActivity(intent)
+                }
             }
-            if (R.id.nav_home === id) {
-            }
-            if (R.id.nav_search === id) {
-                val intent = Intent(this@MainActivity, SearchActivity::class.java)
-                startActivity(intent)
-            }
+            fragmentTransaction.commit()
             true
         })
     }
