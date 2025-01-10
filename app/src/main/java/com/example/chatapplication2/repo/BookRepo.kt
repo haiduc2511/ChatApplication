@@ -36,6 +36,11 @@ class BookRepo {
             .addOnCompleteListener(onCompleteListener)
     }
 
+    fun getBookById(value: String, onCompleteListener: OnCompleteListener<QuerySnapshot>) {
+        db.collection(COLLECTION_NAME).whereEqualTo("bid", value).get()
+            .addOnCompleteListener(onCompleteListener)
+    }
+
     // Update a book in Firebase
     fun updateBook(id: String, book: Book, onCompleteListener: OnCompleteListener<Void>) {
         db.collection(COLLECTION_NAME).document(id).set(book)

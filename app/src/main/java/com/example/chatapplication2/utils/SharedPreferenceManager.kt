@@ -14,7 +14,7 @@ class SharedPreferenceManager(context: Context) {
 
     // Save a string value
     fun setString(key: String, value: String) {
-        preferences.edit().putString(key, value).apply()
+        preferences.edit().putString(key, value).commit()
     }
 
     fun getString(key: String, defaultValue: String = ""): String {

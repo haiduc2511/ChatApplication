@@ -8,19 +8,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.chatapplication2.R
 import com.example.chatapplication2.databinding.FragmentReadBinding
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
+import com.example.chatapplication2.utils.SharedPreferenceManager
+import com.example.chatapplication2.viewmodel.BookViewModel
+import com.example.chatapplication2.viewmodel.GroupViewModel
 import com.github.barteksc.pdfviewer.listener.OnLongPressListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
 import com.github.barteksc.pdfviewer.listener.OnTapListener
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -34,6 +43,8 @@ class ReadFragment : Fragment() {
 
     private var _binding: FragmentReadBinding? = null
     private val binding get() = _binding!!
+    private val groupViewModel: GroupViewModel by viewModels()
+    private val bookViewModel: BookViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,16 +57,34 @@ class ReadFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val group: Group? = requireActivity().intent.getParcelableExtra("group")
-        val book: Book? = requireActivity().intent.getParcelableExtra("book")
+        val groupId: String = SharedPreferenceManager(requireContext()).getString("aboutToReadGroupId")
+        val bookId: String = SharedPreferenceManager(requireContext()).getString("aboutToReadBookId")
+        Log.d("check book null", bookId.toString())
+        Log.d("check group null", groupId.toString())
 
-        Log.d("check book null", book.toString())
-        Log.d("check group null", group.toString())
-        if (book != null) {
-            downloadAndOpenPdf(book.fileBookLink)
-        }
+        groupViewModel.getGroupById(groupId, object : OnCompleteListener<QuerySnapshot> {
+            override fun onComplete(task: Task<QuerySnapshot>) {
+                if (task.isSuccessful) {
+                    val groups = task.result?.toObjects(Group::class.java) ?: emptyList()
+                    if (groups.isNotEmpty()) {
+                    }
+                }
+            }
+        })
 
-        binding.tvChooseUri.text = group.toString()
+        bookViewModel.getBookById(bookId, object : OnCompleteListener<QuerySnapshot> {
+            override fun onComplete(task: Task<QuerySnapshot>) {
+                if (task.isSuccessful) {
+                    val books = task.result?.toObjects(Book::class.java) ?: emptyList()
+                    if (books.isNotEmpty()) {
+                        downloadAndOpenPdf(books[0].fileBookLink)
+                    }
+                }
+            }
+        })
+
+
+        binding.tvChooseUri.text = groupId.toString()
         binding.tvChooseUri.setOnClickListener {
             openFileChooser()
         }

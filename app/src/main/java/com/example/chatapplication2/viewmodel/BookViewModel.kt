@@ -68,6 +68,10 @@ class BookViewModel : ViewModel() {
         })
     }
 
+    fun getBookById(value: String, onCompleteListener: OnCompleteListener<QuerySnapshot>) {
+        bookRepo.getBookById(value, onCompleteListener)
+    }
+
     // Update an existing book
     fun updateBook(id: String, book: Book) {
         bookRepo.updateBook(id, book, object : OnCompleteListener<Void> {
