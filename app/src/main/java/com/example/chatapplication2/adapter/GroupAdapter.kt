@@ -31,6 +31,9 @@ class GroupAdapter(private val groups: List<Group>,
         val book = books.get("${groups[position].bookId}")
         if (book != null) {
             holder.binding.tvBookName.setText("" + book!!.bookTitle)
+        } else {
+            holder.binding.tvBookName.setText("adumaaaa")
+
         }
         Glide.with(holder.itemView.context).asBitmap().load(groups[position].groupPhotoLink).into(holder.binding.ivBookCover)
         holder.itemView.setOnClickListener {

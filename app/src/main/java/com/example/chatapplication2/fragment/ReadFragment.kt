@@ -115,8 +115,7 @@ class ReadFragment : Fragment() {
                 }
                 openPdf(Uri.fromFile(pdfFile))
             } catch (e: Exception) {
-                Log.d("ReadFragment", e.message.toString())
-                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.d("downloadAndOpenPdf in ReadFragment", e.message.toString())
             }
         }
     }

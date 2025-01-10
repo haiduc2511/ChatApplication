@@ -17,6 +17,7 @@ import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.GroupAdapter
 import com.example.chatapplication2.databinding.ActivityMainBinding
 import com.example.chatapplication2.fragment.ChatFragment
+import com.example.chatapplication2.fragment.MainFragment
 import com.example.chatapplication2.fragment.ReadFragment
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
@@ -41,73 +42,8 @@ class MainActivity : AppCompatActivity() {
         initCloudinary()
         initBottomNavigation()
 
-        binding.imageView2.setOnClickListener {
-            val intent = Intent(this@MainActivity, TestMainActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.rvBookRecommendList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-        binding.ibSearch.setOnClickListener {
-            val intent = Intent(this@MainActivity, ChatActivity::class.java)
-            startActivity(intent)
-
-        }
-        groupViewModel.getGroups()
-        bookViewModel.getBooks()
-
-        bookViewModel.booksLiveData.observe(this) { books ->
-            // Handle the list of books, e.g., display in a RecyclerView
-            for (book in books) {
-                bookMap.put(book.bid, book);
-            }
-        }
-        // Observe the groupsLiveData
-        groupViewModel.groupsLiveData.observe(this, Observer { groups ->
-            Toast.makeText(this, "co modification", Toast.LENGTH_SHORT).show()
-
-            val adapter = GroupAdapter(groups, bookMap)
-            binding.rvBookRecommendList.adapter = adapter
-        })
-
-        Log.d("duma", bookMap.toString() + "\n" + groupViewModel.getGroups().toString())
-
-        // Observe errorLiveData for errors
-        groupViewModel.errorLiveData.observe(this, Observer { error ->
-            // Handle error (e.g., show a Toast or Log)
-            error?.let {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-            }
-        })
-
     }
 
-    override fun onResume() {
-        SharedPreferenceManager(this).getString("mostRecentGroupId").apply {
-            if (this.equals("")) {
-                Glide.with(this@MainActivity).load(R.drawable.img_demo_book).into(binding.ivRecentBookCover)
-            } else {
-                groupViewModel.getGroupById(this, object :
-                    OnCompleteListener<QuerySnapshot> {
-                    override fun onComplete(task: Task<QuerySnapshot>) {
-                        if (task.isSuccessful) {
-                            val groups = task.result?.toObjects(Group::class.java) ?: emptyList()
-                            Log.d("mostRecentGroupId", this@apply + " " + groups.toString())
-                            if (!groups.isEmpty()) {
-                                val mostRecentGroup = groups[0]
-                                Log.d("mostRecentGroupId", mostRecentGroup.toString())
-                                binding.tvRecentGroupName.text = mostRecentGroup.groupName
-                                binding.tvRecentBookName.text = if (bookMap.containsKey(mostRecentGroup.bookId)) bookMap[mostRecentGroup.bookId]!!.bookTitle else "duma"
-                                Glide.with(this@MainActivity).load(groups[0].groupPhotoLink).into(binding.ivRecentBookCover)
-                            }
-                        }
-                    }
-                })
-            }
-        }
-
-        super.onResume()
-    }
 
     private fun initCloudinary() {
         if (!MediaManagerState.isInitialized) {
@@ -123,13 +59,14 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNavigation() {
         binding.bnMain.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { menuItem ->
             val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_container, MainFragment())
             when (menuItem.itemId) {
 //                R.id.nav_profile -> {
 //                    fragmentTransaction.replace(R.id.fragment_container, ProfileFragment())
 //                }
-//                R.id.nav_home -> {
-//                    fragmentTransaction.replace(R.id.fragment_container, HomeFragment())
-//                }
+                R.id.nav_home -> {
+                    fragmentTransaction.replace(R.id.fragment_container, MainFragment())
+                }
                 R.id.nav_read -> {
                     fragmentTransaction.replace(R.id.fragment_container, ReadFragment())
                 }
