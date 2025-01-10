@@ -25,7 +25,8 @@ class BookActivity : AppCompatActivity() {
 
     private val bookViewModel: BookViewModel by viewModels()
     private lateinit var binding: ActivityBookBinding
-    private lateinit var uri: Uri
+    private lateinit var imageUri: Uri
+    private lateinit var fileUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,7 @@ class BookActivity : AppCompatActivity() {
                 userUploadId = "user123", // Example user ID
                 bookSummary = binding.etBookSummary.text.toString(),
                 fileBookLink = binding.etFileBookLink.text.toString(),
+                bookPhotoLink = binding.etBookPhotoLink.text.toString(),
                 authorName = binding.etAuthorName.text.toString()
             )
             bookViewModel.addBook(newBook)
@@ -73,6 +75,7 @@ class BookActivity : AppCompatActivity() {
                 userUploadId = "user123", // Example user ID
                 bookSummary = binding.etBookSummary.text.toString(),
                 fileBookLink = binding.etFileBookLink.text.toString(),
+                bookPhotoLink = binding.etBookPhotoLink.text.toString(),
                 authorName = binding.etAuthorName.text.toString()
             )
             bookViewModel.updateBook(requestId, newBook)
@@ -124,7 +127,7 @@ class BookActivity : AppCompatActivity() {
     val PICK_PDF_REQUEST = 2
     private fun openImageChooser() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-        intent.setType("images/*")
+        intent.setType("image/*")
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         intent.addCategory(Intent.CATEGORY_OPENABLE) // Ensure files can be opened
         startActivityForResult(
@@ -155,12 +158,12 @@ class BookActivity : AppCompatActivity() {
                         Log.d("URI", imageUri.toString())
                         uriList.add(imageUri)
                     }
-                    uri = uriList[0]!!
+                    imageUri = uriList[0]!!
                 } else if (data.data != null) { // Single image selected
-                    val imageUri = data.data
-                    uri = imageUri!!
+                    val imageUri2 = data.data
+                    imageUri = imageUri2!!
                 }
-                uploadBookCoverToCloudinary(uri)
+                uploadBookCoverToCloudinary(imageUri)
             }
         }
 
@@ -175,14 +178,14 @@ class BookActivity : AppCompatActivity() {
                         Log.d("PDF_URI", pdfUri.toString())
                         uriList.add(pdfUri)
                     }
-                    uri = uriList[0]!!
+                    fileUri = uriList[0]!!
                 } else if (data.data != null) { // Single PDF selected
                     val pdfUri = data.data
-                    uri = pdfUri!!
+                    fileUri = pdfUri!!
                 }
 
                 // Example function to handle the PDF upload or processing
-                uploadPdfToCloudinary(uri)
+                uploadPdfToCloudinary(fileUri)
             }
         }
 
@@ -197,7 +200,7 @@ class BookActivity : AppCompatActivity() {
 
             override fun onSuccess(requestId: String, resultData: Map<*, *>) {
                 val imageUrl = (resultData["secure_url"] as String?)!!
-                binding.etFileBookLink.setText(imageUrl)
+                binding.etBookPhotoLink.setText(imageUrl)
                 Glide.with(this@BookActivity).asBitmap().load(imageUrl).into(binding.imageView4)
                 Log.d(ContentValues.TAG, "Upload successful. Image URL: $imageUrl")
             }

@@ -10,9 +10,10 @@ data class Book(
     val userUploadId: String = "",
     var bookSummary: String = "",
     val fileBookLink: String = "",
+    val bookPhotoLink: String = "",
     var authorName: String = ""
 ) : Parcelable {
     override fun toString(): String {
-        return "Book(bid='$bid', bookTitle=$bookTitle, userUploadId=$userUploadId, bookSummary=$bookSummary, fileBookLink=$fileBookLink, authorName=$authorName)"
+        return "Book(bid='$bid', bookTitle=$bookTitle, userUploadId=$userUploadId, bookSummary=$bookSummary, fileBookLink=$fileBookLink, bookPhotoLink=$bookPhotoLink authorName=$authorName)"
     }
 }

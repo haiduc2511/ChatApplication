@@ -68,35 +68,36 @@
                 android:id="@+id/iv_recent_book_cover"
                 android:layout_width="100dp"
                 android:layout_height="150dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/im_book_cover_3" />
 
             <TextView
-                android:id="@+id/tv_recent_book_name"
+                android:id="@+id/tv_recent_group_name"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="tv_recent_book_name"
+                android:text="tv_recent_group_name"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/iv_recent_book_cover"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_recent_author_name"
+                android:id="@+id/tv_recent_book_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                android:text="tv_recent_author_name"
+                android:text="tv_recent_book_name"
                 android:textStyle="italic"
                 app:layout_constraintStart_toEndOf="@+id/iv_recent_book_cover"
-                app:layout_constraintTop_toBottomOf="@+id/tv_recent_book_name" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_recent_group_name" />
 
             <Button
                 android:id="@+id/bt_continue_reading"
@@ -142,7 +143,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recommended for you"
+        android:text="Your groups"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
@@ -167,15 +168,6 @@
         app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cardView" />
 
 <!--    <ScrollView-->
 <!--        android:layout_width="match_parent"-->

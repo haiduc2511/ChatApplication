@@ -28,6 +28,13 @@
         android:inputType="text" />
 
     <EditText
+        android:id="@+id/etBookPhotoLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="etBookPhotoLink"
+        android:inputType="text" />
+
+    <EditText
         android:id="@+id/etAuthorName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

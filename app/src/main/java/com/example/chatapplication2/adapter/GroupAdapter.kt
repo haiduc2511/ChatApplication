@@ -13,6 +13,7 @@ import com.example.chatapplication2.activityreal.ReadActivity
 import com.example.chatapplication2.databinding.ItemGroupBinding
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
+import com.example.chatapplication2.utils.SharedPreferenceManager
 
 class GroupAdapter(private val groups: List<Group>,
                    private val books: HashMap<String, Book>
@@ -36,6 +37,7 @@ class GroupAdapter(private val groups: List<Group>,
         Log.d("duma privacyMode", groups[position].privacyMode)
 
         holder.itemView.setOnClickListener {
+            SharedPreferenceManager(holder.itemView.context).setString("mostRecentGroupId", groups[position].gid)
             Intent(it.context, ReadActivity::class.java).apply {
                 putExtra("group", groups[position]) // Replace "key_name" and "YourStringValue" with your key and value
                 putExtra("book", book)

@@ -34,6 +34,10 @@ class GroupRepo {
         db.collection(COLLECTION_NAME).whereEqualTo(field, value).get()
             .addOnCompleteListener(onCompleteListener)
     }
+    fun getGroupById(value: String, onCompleteListener: OnCompleteListener<QuerySnapshot>) {
+        db.collection(COLLECTION_NAME).whereEqualTo("gid", value).get()
+            .addOnCompleteListener(onCompleteListener)
+    }
 
     // Update a group
     fun updateGroup(id: String, group: Group, onCompleteListener: OnCompleteListener<Void>) {

@@ -66,6 +66,10 @@ class GroupViewModel : ViewModel() {
             }
         })
     }
+    fun getGroupById(value: String, onCompleteListener: OnCompleteListener<QuerySnapshot>) {
+        groupRepo.getGroupById(value, onCompleteListener)
+    }
+
 
     // Update a group
     fun updateGroup(id: String, group: Group) {
