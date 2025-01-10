@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -19,6 +20,7 @@ import com.example.chatapplication2.databinding.ActivityMainBinding
 import com.example.chatapplication2.fragment.ChatFragment
 import com.example.chatapplication2.fragment.MainFragment
 import com.example.chatapplication2.fragment.ReadFragment
+import com.example.chatapplication2.fragment.SearchFragment
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
 import com.example.chatapplication2.utils.MediaManagerState
@@ -56,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             MediaManagerState.initialize()
         }
     }
-    private fun initBottomNavigation() {
+    private fun initBottomNavigationOld() {
         binding.bnMain.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { menuItem ->
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_container, MainFragment())
@@ -81,6 +83,53 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.commit()
             true
         })
+    }
+    private fun initBottomNavigation() {
+        val fragmentManager = supportFragmentManager
+        val fragments = mutableMapOf<Int, Fragment>()
+
+        // Create the first fragment (MainFragment) and add it to the container
+        val mainFragment = MainFragment()
+        fragments[R.id.nav_home] = mainFragment
+        val readFragment = ReadFragment()
+        fragments[R.id.nav_read] = readFragment
+        val chatFragment = ChatFragment()
+        fragments[R.id.nav_chat] = chatFragment
+        val searchFragment = SearchFragment()
+        fragments[R.id.nav_search] = searchFragment
+
+        fragmentManager.beginTransaction()
+            .add(R.id.fragment_container, mainFragment)
+            .add(R.id.fragment_container, readFragment)
+            .hide(readFragment)
+            .add(R.id.fragment_container, chatFragment)
+            .hide(chatFragment)
+            .add(R.id.fragment_container, searchFragment)
+            .hide(searchFragment)
+            .commit()
+
+        var activeFragment: Fragment = mainFragment
+
+        binding.bnMain.setOnItemSelectedListener { menuItem ->
+            val selectedFragment = when (menuItem.itemId) {
+                R.id.nav_home -> fragments.get(R.id.nav_home)
+                R.id.nav_read -> fragments.get(R.id.nav_read)
+                R.id.nav_chat -> fragments.get(R.id.nav_chat)
+                R.id.nav_search -> fragments.get(R.id.nav_search)
+                else -> return@setOnItemSelectedListener false
+            }!!
+
+            // Show the selected fragment and hide the current one
+            if (selectedFragment != activeFragment) {
+                fragmentManager.beginTransaction()
+                    .hide(activeFragment)
+                    .show(selectedFragment)
+                    .commit()
+                activeFragment = selectedFragment
+            }
+
+            true
+        }
     }
 
 
