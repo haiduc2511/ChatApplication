@@ -94,8 +94,8 @@ class MainActivity : AppCompatActivity() {
         fragments[R.id.nav_home] = mainFragment
         val readFragment = ReadFragment()
         fragments[R.id.nav_read] = readFragment
-        val chatFragment = GroupChatFragment()
-        fragments[R.id.nav_chat] = chatFragment
+        val groupChatFragment = GroupChatFragment()
+        fragments[R.id.nav_chat] = groupChatFragment
         val searchFragment = SearchFragment()
         fragments[R.id.nav_search] = searchFragment
 
@@ -103,8 +103,8 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragment_container, mainFragment)
             .add(R.id.fragment_container, readFragment)
             .hide(readFragment)
-            .add(R.id.fragment_container, chatFragment)
-            .hide(chatFragment)
+            .add(R.id.fragment_container, groupChatFragment)
+            .hide(groupChatFragment)
             .add(R.id.fragment_container, searchFragment)
             .hide(searchFragment)
             .commit()

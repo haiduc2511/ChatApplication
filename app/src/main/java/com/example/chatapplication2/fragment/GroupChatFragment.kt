@@ -40,7 +40,13 @@ class GroupChatFragment : Fragment() {
 
     private fun setupRecyclerView() {
         groupToChatAdapter = GroupToChatAdapter { group ->
-            Toast.makeText(requireContext(), group.toString(), Toast.LENGTH_SHORT).show()
+            val fragmentManager = childFragmentManager
+            val chatFragment = ChatFragment()
+            fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, chatFragment)
+                .commit()
+
+//            Toast.makeText(requireContext(), group.toString(), Toast.LENGTH_SHORT).show()
         }
         binding.groupsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.groupsRecyclerView.adapter = groupToChatAdapter
