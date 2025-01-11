@@ -20,9 +20,11 @@ import com.example.chatapplication2.adapter.GroupAdapter
 import com.example.chatapplication2.databinding.FragmentMainBinding
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
+import com.example.chatapplication2.utils.FirebaseHelper
 import com.example.chatapplication2.viewmodel.BookViewModel
 import com.example.chatapplication2.viewmodel.GroupViewModel
 import com.example.chatapplication2.utils.SharedPreferenceManager
+import com.example.chatapplication2.viewmodel.GroupUserViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.QuerySnapshot
@@ -33,6 +35,7 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val groupViewModel: GroupViewModel by viewModels()
+    private val groupUserViewModel: GroupUserViewModel by viewModels()
     private val bookViewModel: BookViewModel by viewModels()
     private val bookMap = HashMap<String, Book>()
 
@@ -64,7 +67,19 @@ class MainFragment : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         // Fetch groups and books from ViewModel
-        groupViewModel.getGroups()
+        val userId = FirebaseHelper.instance!!.getUserId()!!
+        Toast.makeText(context, userId, Toast.LENGTH_SHORT).show()
+
+        groupUserViewModel.getGroupUsersByField("userId", userId)
+        groupUserViewModel.groupUsersLiveData.observe(viewLifecycleOwner) {groupUsers ->
+            Log.d("checkGroupUsers", groupUsers.toString())
+            val groupIds: List<String> = groupUsers.map { it.groupId }
+            Log.d("checkIds", groupIds.toString())
+
+            if (groupIds.isNotEmpty()) {
+                groupViewModel.getGroupsByIds(groupIds)
+            }
+        }
         bookViewModel.getBooks()
 
         // Observe booksLiveData
@@ -76,7 +91,8 @@ class MainFragment : Fragment() {
 
         // Observe groupsLiveData
         groupViewModel.groupsLiveData.observe(viewLifecycleOwner) { groups ->
-            Toast.makeText(requireContext(), "Data updated", Toast.LENGTH_SHORT).show()
+            Log.d("checkGroups", groups.toString())
+//            Toast.makeText(requireContext(), "Data updated", Toast.LENGTH_SHORT).show()
             val adapter = GroupAdapter(groups, bookMap)
             binding.rvBookRecommendList.adapter = adapter
         }

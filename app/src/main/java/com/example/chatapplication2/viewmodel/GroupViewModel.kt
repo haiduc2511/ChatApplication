@@ -69,7 +69,18 @@ class GroupViewModel : ViewModel() {
     fun getGroupById(value: String, onCompleteListener: OnCompleteListener<QuerySnapshot>) {
         groupRepo.getGroupById(value, onCompleteListener)
     }
-
+    fun getGroupsByIds(groupIds: List<String>) {
+        groupRepo.getGroupsByIds(groupIds, object : OnCompleteListener<QuerySnapshot> {
+            override fun onComplete(task: Task<QuerySnapshot>) {
+                if (task.isSuccessful) {
+                    val groups = task.result?.toObjects(Group::class.java) ?: emptyList()
+                    _groupsLiveData.postValue(groups)
+                } else {
+                    _errorLiveData.postValue("Error: ${task.exception?.message}")
+                }
+            }
+        })
+    }
 
     // Update a group
     fun updateGroup(id: String, group: Group) {

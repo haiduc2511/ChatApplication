@@ -6,6 +6,8 @@ import com.cloudinary.android.callback.UploadCallback
 import com.example.chatapplication2.model.Group
 import com.example.chatapplication2.utils.FirebaseHelper
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 
@@ -38,7 +40,12 @@ class GroupRepo {
         db.collection(COLLECTION_NAME).whereEqualTo("gid", value).get()
             .addOnCompleteListener(onCompleteListener)
     }
-
+    fun getGroupsByIds(groupIds: List<String>, onCompleteListener: OnCompleteListener<QuerySnapshot>) {
+        db.collection(COLLECTION_NAME)
+            .whereIn("gid", groupIds)
+            .get()
+            .addOnCompleteListener(onCompleteListener)
+    }
     // Update a group
     fun updateGroup(id: String, group: Group, onCompleteListener: OnCompleteListener<Void>) {
         db.collection(COLLECTION_NAME).document(id).set(group)

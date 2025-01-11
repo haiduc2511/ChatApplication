@@ -17,7 +17,9 @@ class FirebaseHelper private constructor() {
         auth = FirebaseAuth.getInstance()
     }
 
-
+    fun getUserId(): String? {
+        return auth.currentUser?.uid
+    }
     companion object {
         // Singleton instance
         @get:Synchronized

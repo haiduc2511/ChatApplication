@@ -172,9 +172,10 @@ class ReadFragment : Fragment() {
             .onPageChange(OnPageChangeListener { page, pageCount ->
                 Toast.makeText(
                     requireContext(),
-                    "Page changed: $page / $pageCount",
+                    "Page changed: ${page + 1} / $pageCount",
                     Toast.LENGTH_SHORT
                 ).show()
+                binding.textView.text = "${page + 1} / $pageCount"
             })
             .load()
     }
