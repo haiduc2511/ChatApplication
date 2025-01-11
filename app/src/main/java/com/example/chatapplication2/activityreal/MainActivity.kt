@@ -18,6 +18,7 @@ import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.GroupAdapter
 import com.example.chatapplication2.databinding.ActivityMainBinding
 import com.example.chatapplication2.fragment.ChatFragment
+import com.example.chatapplication2.fragment.GroupChatFragment
 import com.example.chatapplication2.fragment.MainFragment
 import com.example.chatapplication2.fragment.ReadFragment
 import com.example.chatapplication2.fragment.SearchFragment
@@ -93,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         fragments[R.id.nav_home] = mainFragment
         val readFragment = ReadFragment()
         fragments[R.id.nav_read] = readFragment
-        val chatFragment = ChatFragment()
+        val chatFragment = GroupChatFragment()
         fragments[R.id.nav_chat] = chatFragment
         val searchFragment = SearchFragment()
         fragments[R.id.nav_search] = searchFragment
