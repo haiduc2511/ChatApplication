@@ -17,6 +17,7 @@ import com.example.chatapplication2.BuildConfig
 import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.GroupAdapter
 import com.example.chatapplication2.databinding.ActivityMainBinding
+import com.example.chatapplication2.fragment.AccountFragment
 import com.example.chatapplication2.fragment.ChatFragment
 import com.example.chatapplication2.fragment.GroupChatFragment
 import com.example.chatapplication2.fragment.MainFragment
@@ -98,6 +99,8 @@ class MainActivity : AppCompatActivity() {
         fragments[R.id.nav_chat] = groupChatFragment
         val searchFragment = SearchFragment()
         fragments[R.id.nav_search] = searchFragment
+        val accountFragment = AccountFragment()
+        fragments[R.id.nav_profile] = accountFragment
 
         fragmentManager.beginTransaction()
             .add(R.id.fragment_container, mainFragment)
@@ -107,6 +110,8 @@ class MainActivity : AppCompatActivity() {
             .hide(groupChatFragment)
             .add(R.id.fragment_container, searchFragment)
             .hide(searchFragment)
+            .add(R.id.fragment_container, accountFragment)
+            .hide(accountFragment)
             .commit()
 
         var activeFragment: Fragment = mainFragment
@@ -117,6 +122,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_read -> fragments.get(R.id.nav_read)
                 R.id.nav_chat -> fragments.get(R.id.nav_chat)
                 R.id.nav_search -> fragments.get(R.id.nav_search)
+                R.id.nav_profile -> fragments.get(R.id.nav_profile)
                 else -> return@setOnItemSelectedListener false
             }!!
 

@@ -86,4 +86,6 @@ dependencies {
     implementation(libs.play.services.auth) // Google Sign-In
     implementation("com.github.DImuthuUpe:AndroidPdfViewer:3.1.0-beta.1")
 
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
 }
