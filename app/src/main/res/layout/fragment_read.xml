@@ -7,24 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".fragment.ReadFragment">
 
-    <!-- TextView to choose URI -->
-    <TextView
-        android:id="@+id/tv_choose_uri"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:elevation="20dp"
-        android:text="Choose URI"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="8dp" />
-
     <!-- PDFView to display PDF files -->
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdf_View"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

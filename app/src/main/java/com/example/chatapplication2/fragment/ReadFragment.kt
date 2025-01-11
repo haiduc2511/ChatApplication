@@ -84,10 +84,10 @@ class ReadFragment : Fragment() {
         })
 
 
-        binding.tvChooseUri.text = groupId.toString()
-        binding.tvChooseUri.setOnClickListener {
-            openFileChooser()
-        }
+//        binding.tvChooseUri.text = groupId.toString()
+//        binding.tvChooseUri.setOnClickListener {
+//            openFileChooser()
+//        }
     }
 
     private fun openFileChooser() {
