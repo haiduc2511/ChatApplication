@@ -29,7 +29,9 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.QuerySnapshot
 
-class MainFragment : Fragment() {
+class MainFragment(
+    private val onGroupClick: () -> Unit
+) : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -93,7 +95,9 @@ class MainFragment : Fragment() {
         groupViewModel.groupsLiveData.observe(viewLifecycleOwner) { groups ->
             Log.d("checkGroups", groups.toString())
 //            Toast.makeText(requireContext(), "Data updated", Toast.LENGTH_SHORT).show()
-            val adapter = GroupAdapter(groups, bookMap)
+            val adapter = GroupAdapter(groups, bookMap) {
+                onGroupClick()
+            }
             binding.rvBookRecommendList.adapter = adapter
         }
 

@@ -16,8 +16,9 @@ import com.example.chatapplication2.model.Group
 import com.example.chatapplication2.utils.SharedPreferenceManager
 
 class GroupAdapter(private val groups: List<Group>,
-                   private val books: HashMap<String, Book>
-    ) : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
+                   private val books: HashMap<String, Book>,
+                   private val onGroupClick: () -> Unit
+) : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemGroupBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -37,16 +38,17 @@ class GroupAdapter(private val groups: List<Group>,
         }
         Glide.with(holder.itemView.context).asBitmap().load(groups[position].groupPhotoLink).into(holder.binding.ivBookCover)
         holder.itemView.setOnClickListener {
+            onGroupClick()
             SharedPreferenceManager(holder.itemView.context).apply {
                 setString("mostRecentGroupId", groups[position].gid)
                 setString("aboutToReadGroupId", groups[position].gid)
                 setString("aboutToReadBookId", book!!.bid)
             }
-            Intent(it.context, ReadActivity::class.java).apply {
-                putExtra("group", groups[position]) // Replace "key_name" and "YourStringValue" with your key and value
-                putExtra("book", book)
-                it.context.startActivity(this)
-            }
+//            Intent(it.context, ReadActivity::class.java).apply {
+//                putExtra("group", groups[position]) // Replace "key_name" and "YourStringValue" with your key and value
+//                putExtra("book", book)
+//                it.context.startActivity(this)
+//            }
         }
     }
 

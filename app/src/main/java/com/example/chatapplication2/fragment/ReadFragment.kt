@@ -45,6 +45,7 @@ class ReadFragment : Fragment() {
     private val binding get() = _binding!!
     private val groupViewModel: GroupViewModel by viewModels()
     private val bookViewModel: BookViewModel by viewModels()
+    private var bookReadingId: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,40 +57,48 @@ class ReadFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val groupId: String = SharedPreferenceManager(requireContext()).getString("aboutToReadGroupId")
-        val bookId: String = SharedPreferenceManager(requireContext()).getString("aboutToReadBookId")
-        Log.d("check book null", bookId.toString())
-        Log.d("check group null", groupId.toString())
-
-        groupViewModel.getGroupById(groupId, object : OnCompleteListener<QuerySnapshot> {
-            override fun onComplete(task: Task<QuerySnapshot>) {
-                if (task.isSuccessful) {
-                    val groups = task.result?.toObjects(Group::class.java) ?: emptyList()
-                    if (groups.isNotEmpty()) {
-                    }
-                }
-            }
-        })
-
-        bookViewModel.getBookById(bookId, object : OnCompleteListener<QuerySnapshot> {
-            override fun onComplete(task: Task<QuerySnapshot>) {
-                if (task.isSuccessful) {
-                    val books = task.result?.toObjects(Book::class.java) ?: emptyList()
-                    if (books.isNotEmpty()) {
-                        downloadAndOpenPdf(books[0].fileBookLink)
-                    }
-                }
-            }
-        })
-
-
-//        binding.tvChooseUri.text = groupId.toString()
-//        binding.tvChooseUri.setOnClickListener {
-//            openFileChooser()
-//        }
     }
 
+    override fun onStart() {
+        super.onStart()
+        loadNewGroupFromMainFragment()
+    }
+
+    public fun loadNewGroupFromMainFragment() {
+        val groupId: String = SharedPreferenceManager(requireContext()).getString("aboutToReadGroupId")
+        val bookId: String = SharedPreferenceManager(requireContext()).getString("aboutToReadBookId")
+
+        Log.d("check book null", bookId)
+        Log.d("check group null", groupId)
+
+        if (!bookReadingId.equals(bookId)) {
+            groupViewModel.getGroupById(groupId, object : OnCompleteListener<QuerySnapshot> {
+                override fun onComplete(task: Task<QuerySnapshot>) {
+                    if (task.isSuccessful) {
+                        val groups = task.result?.toObjects(Group::class.java) ?: emptyList()
+                        if (groups.isNotEmpty()) {
+                            //TODO: làm thêm phần customView cho đống comment
+                        }
+                    }
+                }
+            })
+
+            bookViewModel.getBookById(bookId, object : OnCompleteListener<QuerySnapshot> {
+                override fun onComplete(task: Task<QuerySnapshot>) {
+                    if (task.isSuccessful) {
+                        val books = task.result?.toObjects(Book::class.java) ?: emptyList()
+                        if (books.isNotEmpty()) {
+                            downloadAndOpenPdf(books[0].fileBookLink)
+                        }
+                    }
+                }
+            })
+
+        }
+
+        bookReadingId = bookId
+
+    }
     private fun openFileChooser() {
         val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
             type = "application/pdf"
@@ -170,11 +179,11 @@ class ReadFragment : Fragment() {
                 ).show()
             })
             .onPageChange(OnPageChangeListener { page, pageCount ->
-                Toast.makeText(
-                    requireContext(),
-                    "Page changed: ${page + 1} / $pageCount",
-                    Toast.LENGTH_SHORT
-                ).show()
+//                Toast.makeText(
+//                    requireContext(),
+//                    "Page changed: ${page + 1} / $pageCount",
+//                    Toast.LENGTH_SHORT
+//                ).show()
                 binding.textView.text = "${page + 1} / $pageCount"
             })
             .load()

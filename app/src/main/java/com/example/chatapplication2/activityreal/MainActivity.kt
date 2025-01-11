@@ -60,39 +60,12 @@ class MainActivity : AppCompatActivity() {
             MediaManagerState.initialize()
         }
     }
-    private fun initBottomNavigationOld() {
-        binding.bnMain.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { menuItem ->
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, MainFragment())
-            when (menuItem.itemId) {
-//                R.id.nav_profile -> {
-//                    fragmentTransaction.replace(R.id.fragment_container, ProfileFragment())
-//                }
-                R.id.nav_home -> {
-                    fragmentTransaction.replace(R.id.fragment_container, MainFragment())
-                }
-                R.id.nav_read -> {
-                    fragmentTransaction.replace(R.id.fragment_container, ReadFragment())
-                }
-                R.id.nav_chat -> {
-                    fragmentTransaction.replace(R.id.fragment_container, ChatFragment())
-                }
-                R.id.nav_search -> {
-                    val intent = Intent(this@MainActivity, SearchActivity::class.java)
-                    startActivity(intent)
-                }
-            }
-            fragmentTransaction.commit()
-            true
-        })
-    }
     private fun initBottomNavigation() {
         val fragmentManager = supportFragmentManager
         val fragments = mutableMapOf<Int, Fragment>()
 
         // Create the first fragment (MainFragment) and add it to the container
-        val mainFragment = MainFragment()
-        fragments[R.id.nav_home] = mainFragment
+
         val readFragment = ReadFragment()
         fragments[R.id.nav_read] = readFragment
         val groupChatFragment = GroupChatFragment()
@@ -101,6 +74,11 @@ class MainActivity : AppCompatActivity() {
         fragments[R.id.nav_search] = searchFragment
         val accountFragment = AccountFragment()
         fragments[R.id.nav_profile] = accountFragment
+        val mainFragment = MainFragment() {
+            readFragment.loadNewGroupFromMainFragment()
+            binding.bnMain.selectedItemId = R.id.nav_read
+        }
+        fragments[R.id.nav_home] = mainFragment
 
         fragmentManager.beginTransaction()
             .add(R.id.fragment_container, mainFragment)
@@ -137,7 +115,7 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
-    }
 
+    }
 
 }
