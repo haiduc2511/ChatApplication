@@ -1,12 +1,17 @@
 package com.example.chatapplication2.fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +26,7 @@ import com.example.chatapplication2.R
 import com.example.chatapplication2.databinding.FragmentReadBinding
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
+import com.example.chatapplication2.utils.RandomPointsView
 import com.example.chatapplication2.utils.SharedPreferenceManager
 import com.example.chatapplication2.viewmodel.BookViewModel
 import com.example.chatapplication2.viewmodel.GroupViewModel
@@ -46,6 +52,7 @@ class ReadFragment : Fragment() {
     private val groupViewModel: GroupViewModel by viewModels()
     private val bookViewModel: BookViewModel by viewModels()
     private var bookReadingId: String = ""
+    private var seeingComments: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +64,53 @@ class ReadFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val xCoordinate = view.findViewById<EditText>(R.id.xCoordinate)
+        val yCoordinate = view.findViewById<EditText>(R.id.yCoordinate)
+        val colorSpinner = view.findViewById<Spinner>(R.id.colorSpinner)
+        val addPointButton = view.findViewById<Button>(R.id.addPointButton)
+        val pointView = view.findViewById<RandomPointsView>(R.id.randomPointsView)
+
+        // Color options
+        val colors = mapOf(
+            "Red" to Color.RED,
+            "Green" to Color.GREEN,
+            "Blue" to Color.BLUE,
+            "Yellow" to Color.YELLOW,
+            "Black" to Color.BLACK
+        )
+
+        // Set up Spinner with color options
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, colors.keys.toList())
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        colorSpinner.adapter = adapter
+
+        addPointButton.setOnClickListener {
+            val x = xCoordinate.text.toString().toFloatOrNull()
+            val y = yCoordinate.text.toString().toFloatOrNull()
+            val selectedColorName = colorSpinner.selectedItem as String
+            val selectedColor = colors[selectedColorName] ?: Color.RED
+
+            if (x != null && y != null && x in 0f..100f && y in 0f..100f) {
+                // Convert coordinates to screen pixels
+                val screenX = pointView.width * (x / 100)
+                val screenY = pointView.height * (y / 100)
+                pointView.addPoint(screenX, screenY, selectedColor)
+            } else {
+                Toast.makeText(requireContext(), "Invalid coordinates. Enter values between 0 and 100.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.ivSeeComments.setOnClickListener {
+            if (seeingComments) {
+                seeingComments = false
+                binding.ivSeeComments.setImageResource(R.drawable.img_not_see)
+                binding.clComments.visibility = View.GONE
+            } else {
+                seeingComments = true
+                binding.ivSeeComments.setImageResource(R.drawable.img_see)
+                binding.clComments.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onStart() {
