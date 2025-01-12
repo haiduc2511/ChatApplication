@@ -118,6 +118,13 @@ class ReadFragment : Fragment() {
         loadNewGroupFromMainFragment()
     }
 
+    fun showFragment(fragment: Fragment) {
+        childFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     public fun loadNewGroupFromMainFragment() {
         val groupId: String = SharedPreferenceManager(requireContext()).getString("aboutToReadGroupId")
         val bookId: String = SharedPreferenceManager(requireContext()).getString("aboutToReadBookId")
@@ -231,6 +238,7 @@ class ReadFragment : Fragment() {
                     "Long press: ${e.x}, ${e.y}",
                     Toast.LENGTH_SHORT
                 ).show()
+                showFragment(GroupUserCommentFragment())
             })
             .onPageChange(OnPageChangeListener { page, pageCount ->
 //                Toast.makeText(
