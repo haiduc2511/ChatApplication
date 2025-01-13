@@ -53,6 +53,7 @@ class ReadFragment : Fragment() {
     private val bookViewModel: BookViewModel by viewModels()
     private var bookReadingId: String = ""
     private var seeingComments: Boolean = true
+    private var pageNumber: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,6 +71,10 @@ class ReadFragment : Fragment() {
         val addPointButton = view.findViewById<Button>(R.id.addPointButton)
         val pointView = view.findViewById<RandomPointsView>(R.id.randomPointsView)
 
+        pointView.onPointClickListener = { x, y ->
+            showFragment(GroupUserCommentFragment(pageNumber ,x, y))
+            Toast.makeText(requireContext(), "Point clicked: ($x, $y)", Toast.LENGTH_SHORT).show()
+        }
         // Color options
         val colors = mapOf(
             "Red" to Color.RED,
@@ -238,7 +243,7 @@ class ReadFragment : Fragment() {
                     "Long press: ${e.x}, ${e.y}",
                     Toast.LENGTH_SHORT
                 ).show()
-                showFragment(GroupUserCommentFragment())
+                showFragment(GroupUserCommentFragment(pageNumber))
             })
             .onPageChange(OnPageChangeListener { page, pageCount ->
 //                Toast.makeText(
@@ -247,6 +252,7 @@ class ReadFragment : Fragment() {
 //                    Toast.LENGTH_SHORT
 //                ).show()
                 binding.textView.text = "${page + 1} / $pageCount"
+                pageNumber = page + 1
             })
             .load()
     }

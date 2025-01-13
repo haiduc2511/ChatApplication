@@ -7,15 +7,17 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import com.example.chatapplication2.model.Group
 
 class RandomPointsView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
 
     private val points = mutableListOf<ColoredPoint>()
     private val pointRadius = 30f
+    var onPointClickListener: ((x: Float, y: Float) -> Unit)? = null
 
     // Method to add a point with a specific color
     fun addPoint(x: Float, y: Float, color: Int) {
@@ -44,7 +46,8 @@ class RandomPointsView @JvmOverloads constructor(
             // Check if the touch is near any point
             points.forEach { point ->
                 if (distance(point.x, point.y, touchX, touchY) <= pointRadius) {
-                    Toast.makeText(context, "Clicked: (${point.x}, ${point.y})", Toast.LENGTH_SHORT).show()
+                    onPointClickListener?.invoke(point.x, point.y)
+//                    Toast.makeText(context, "Clicked: (${point.x}, ${point.y})", Toast.LENGTH_SHORT).show()
                     return true
                 }
             }

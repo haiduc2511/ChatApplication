@@ -25,7 +25,10 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
-class GroupUserCommentFragment : Fragment() {
+class GroupUserCommentFragment(
+    private val pageNumber : Int,
+    private val posX : Float = 0f,
+    private val posY : Float = 0f) : Fragment() {
 
     private lateinit var viewModel: GroupUserCommentViewModel
     private lateinit var adapter: GroupUserCommentAdapter
@@ -73,6 +76,8 @@ class GroupUserCommentFragment : Fragment() {
                     gucid = UUID.randomUUID().toString(),
                     groupUserId = FirebaseHelper.instance!!.getUserId()!!, //TODO: GroupUserId chứ kp UserId
                     comment = commentText,
+                    pagePositionX = posX.toString(),
+                    pagePositionY = posY.toString(),
                     timeStamp = System.currentTimeMillis().toString()
                 )
                 viewModel.addGroupUserComment(newComment)

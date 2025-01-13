@@ -9,10 +9,11 @@ data class GroupUserComment(
     val groupUserId: String = "",
     var comment: String = "",
     val pageNumber: String = "",
-    val pagePosition: String = "",
+    val pagePositionX: String = "",
+    val pagePositionY: String = "",
     val timeStamp: String = ""
 ) : Parcelable {
     override fun toString(): String {
-        return "GroupUserComment(gucid='$gucid', groupUserId=$groupUserId, comment=$comment, pageNumber=$pageNumber, pagePosition=$pagePosition, timeStamp=$timeStamp)"
+        return "GroupUserComment(gucid='$gucid', groupUserId=$groupUserId, comment=$comment, pageNumber=$pageNumber, pagePositionX=$pagePositionX, pagePositionY=$pagePositionY timeStamp=$timeStamp)"
     }
 }

@@ -45,7 +45,8 @@ class GroupUserCommentActivity : AppCompatActivity() {
                 groupUserId = binding.etGroupUserId.text.toString(),
                 comment = binding.etComment.text.toString(),
                 pageNumber = binding.etPageNumber.text.toString(),
-                pagePosition = binding.etPagePosition.text.toString(),
+                pagePositionX = binding.etPagePosition.text.toString(),
+                pagePositionY = binding.etPagePosition.text.toString(),
                 timeStamp = System.currentTimeMillis().toString()
             )
             groupUserCommentViewModel.addGroupUserComment(newComment)
@@ -64,7 +65,8 @@ class GroupUserCommentActivity : AppCompatActivity() {
                 groupUserId = binding.etGroupUserId.text.toString(),
                 comment = binding.etComment.text.toString(),
                 pageNumber = binding.etPageNumber.text.toString(),
-                pagePosition = binding.etPagePosition.text.toString(),
+                pagePositionX = binding.etPagePosition.text.toString(),
+                pagePositionY = binding.etPagePosition.text.toString(),
                 timeStamp = System.currentTimeMillis().toString()
             )
             groupUserCommentViewModel.updateGroupUserComment(commentId, updatedComment)
