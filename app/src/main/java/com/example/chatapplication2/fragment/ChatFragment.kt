@@ -14,6 +14,7 @@ import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.MessageAdapter
 import com.example.chatapplication2.model.GroupUserMessage
 import com.example.chatapplication2.viewmodel.GroupUserMessageViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ChatFragment : Fragment() {
 
@@ -35,6 +36,11 @@ class ChatFragment : Fragment() {
         val recyclerViewMessages: RecyclerView = view.findViewById(R.id.recyclerViewMessages)
         val editTextMessage: EditText = view.findViewById(R.id.editTextMessage)
         val buttonSend: ImageButton = view.findViewById(R.id.buttonSend)
+        val fabBack: FloatingActionButton = view.findViewById(R.id.floatingActionButton)
+
+        fabBack.setOnClickListener {
+            removeFragment()
+        }
 
         adapter = MessageAdapter()
         recyclerViewMessages.layoutManager = LinearLayoutManager(requireContext())
@@ -65,4 +71,10 @@ class ChatFragment : Fragment() {
             }
         }
     }
+    private fun removeFragment() {
+        parentFragmentManager.beginTransaction()
+            .remove(this)
+            .commit()
+    }
+
 }
