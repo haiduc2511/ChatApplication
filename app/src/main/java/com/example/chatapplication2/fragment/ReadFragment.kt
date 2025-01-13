@@ -99,7 +99,9 @@ class ReadFragment : Fragment() {
                 // Convert coordinates to screen pixels
                 val screenX = pointView.width * (x / 100)
                 val screenY = pointView.height * (y / 100)
-                pointView.addPoint(screenX, screenY, selectedColor)
+                Log.d("check toạ độ point2", "${pointView.width} + ${pointView.height} + $x + $y")
+
+                pointView.addPoint(x, y, selectedColor)
             } else {
                 Toast.makeText(requireContext(), "Invalid coordinates. Enter values between 0 and 100.", Toast.LENGTH_SHORT).show()
             }

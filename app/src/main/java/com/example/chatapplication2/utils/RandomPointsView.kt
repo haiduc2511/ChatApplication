@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
@@ -22,6 +23,7 @@ class RandomPointsView @JvmOverloads constructor(
     // Method to add a point with a specific color
     fun addPoint(x: Float, y: Float, color: Int) {
         points.add(ColoredPoint(x, y, color))
+        Log.d("check toạ độ point", "${points.toString()}")
         invalidate() // Redraw the view
     }
 
@@ -34,7 +36,10 @@ class RandomPointsView @JvmOverloads constructor(
 
         points.forEach { point ->
             paint.color = point.color
-            canvas.drawCircle(point.x, point.y, pointRadius, paint)
+            val screenX = width * point.x / 100
+            val screenY = height * point.y / 100
+            Log.d("check toạ độ point", "$width + $height + ${point.toString()}")
+            canvas.drawCircle(screenX, screenY, pointRadius, paint)
         }
     }
 
@@ -57,7 +62,9 @@ class RandomPointsView @JvmOverloads constructor(
 
     // Helper function to calculate distance between two points
     private fun distance(x1: Float, y1: Float, x2: Float, y2: Float): Float {
-        return Math.hypot((x2 - x1).toDouble(), (y2 - y1).toDouble()).toFloat()
+        val screenX = width * x1 / 100
+        val screenY = height * y1 / 100
+        return Math.hypot((x2 - screenX).toDouble(), (y2 - screenY).toDouble()).toFloat()
     }
 
     // Data class to represent a colored point
