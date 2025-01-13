@@ -111,7 +111,33 @@ class MainActivity : AppCompatActivity() {
                     .show(selectedFragment)
                     .commit()
                 activeFragment = selectedFragment
-            }
+            } else {
+                // Remove fragment hiện tại
+                fragmentManager.beginTransaction().remove(activeFragment).commit()
+                fragmentManager.executePendingTransactions()
+
+                // Tạo lại fragment mới
+                val newFragment = when (menuItem.itemId) {
+                    R.id.nav_home -> MainFragment() {
+                        readFragment.loadNewGroupFromMainFragment()
+                        binding.bnMain.selectedItemId = R.id.nav_read
+                    }
+                    R.id.nav_read -> ReadFragment()
+                    R.id.nav_chat -> GroupChatFragment()
+                    R.id.nav_search -> SearchFragment()
+                    R.id.nav_profile -> AccountFragment()
+                    else -> return@setOnItemSelectedListener false
+                }
+                fragments[menuItem.itemId] = newFragment
+
+                // Thêm lại fragment vào container
+                fragmentManager.beginTransaction()
+                    .add(R.id.fragment_container, newFragment)
+                    .commit()
+
+                activeFragment = newFragment
+
+                }
 
             true
         }
