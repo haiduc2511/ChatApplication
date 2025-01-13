@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chatapplication2.R
 import com.example.chatapplication2.model.Book
+import com.example.chatapplication2.model.Group
 
-class BookSearchAdapter : ListAdapter<Book, BookSearchAdapter.BookViewHolder>(BookDiffCallback()) {
+class BookSearchAdapter(
+    private val onBookClick: (Book) -> Unit
+) : ListAdapter<Book, BookSearchAdapter.BookViewHolder>(BookDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_book_search, parent, false)
@@ -20,6 +23,10 @@ class BookSearchAdapter : ListAdapter<Book, BookSearchAdapter.BookViewHolder>(Bo
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = getItem(position)
         holder.bind(book)
+        holder.itemView.setOnClickListener {
+            onBookClick(book)
+        }
+
     }
 
     class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

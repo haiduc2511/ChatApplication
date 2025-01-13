@@ -1,5 +1,6 @@
 package com.example.chatapplication2.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chatapplication2.R
+import com.example.chatapplication2.activitytest.BookActivity
+import com.example.chatapplication2.activitytest.GroupActivity
 import com.example.chatapplication2.adapter.BookSearchAdapter
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.viewmodel.BookViewModel
@@ -34,7 +37,14 @@ class BookSearchFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val adapter = BookSearchAdapter()
+        val adapter = BookSearchAdapter() {
+            Intent(requireContext(), GroupActivity::class.java).apply {
+                val bundle = Bundle()
+                bundle.putParcelable("book", it)
+                putExtras(bundle)
+                startActivity(this)
+            }
+        }
         recyclerView.adapter = adapter
 
         viewModel.getBooks()
