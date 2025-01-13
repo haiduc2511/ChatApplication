@@ -15,6 +15,8 @@ import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.MessageAdapter
 import com.example.chatapplication2.model.GroupUserMessage
 import com.example.chatapplication2.viewmodel.GroupUserMessageViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 
 class ChatActivity : AppCompatActivity() {
 
@@ -54,7 +56,14 @@ class ChatActivity : AppCompatActivity() {
                     message = messageText,
                     replyMessageId = ""
                 )
-                viewModel.addGroupUserMessage(message)
+                viewModel.addGroupUserMessage(message, object : OnCompleteListener<Void> {
+                    override fun onComplete(task: Task<Void>) {
+                        if (task.isSuccessful) {
+
+                        } else {
+                        }
+                    }
+                })
                 editTextMessage.text.clear()
             }
         }

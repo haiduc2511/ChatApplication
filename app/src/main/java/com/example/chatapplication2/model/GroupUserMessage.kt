@@ -10,6 +10,7 @@ data class GroupUserMessage(
     val groupUserId: String = "",
     var message: String = "",
     val replyMessageId: String = ""
+    //TODO: groupChatId cho tam la groupId
 ) : Parcelable {
     override fun toString(): String {
         return "GroupUserMessage(gumid='$gumid', groupChatId=$groupChatId, groupUserId=$groupUserId, message=$message, replyMessageId=$replyMessageId)"

@@ -19,16 +19,8 @@ class GroupUserMessageViewModel : ViewModel() {
     private val groupUserMessageRepo = GroupUserMessageRepo()
 
     // Add a new GroupUserMessage
-    fun addGroupUserMessage(message: GroupUserMessage) {
-        groupUserMessageRepo.addGroupUserMessage(message, object : OnCompleteListener<Void> {
-            override fun onComplete(task: Task<Void>) {
-                if (task.isSuccessful) {
-                    getGroupUserMessages() // Refresh the messages list
-                } else {
-                    _errorLiveData.postValue("Error: ${task.exception?.message}")
-                }
-            }
-        })
+    fun addGroupUserMessage(message: GroupUserMessage, onCompleteListener: OnCompleteListener<Void>) {
+        groupUserMessageRepo.addGroupUserMessage(message, onCompleteListener)
     }
 
     // Get all group user messages

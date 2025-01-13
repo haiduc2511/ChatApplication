@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,10 +14,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.MessageAdapter
 import com.example.chatapplication2.model.GroupUserMessage
+import com.example.chatapplication2.utils.FirebaseHelper
 import com.example.chatapplication2.viewmodel.GroupUserMessageViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class ChatFragment : Fragment() {
+class ChatFragment(
+    private val groupId: String = ""
+) : Fragment() {
 
     private lateinit var viewModel: GroupUserMessageViewModel
     private lateinit var adapter: MessageAdapter
@@ -47,7 +53,7 @@ class ChatFragment : Fragment() {
         recyclerViewMessages.adapter = adapter
 
         // Fetch messages for the group
-        viewModel.fetchGroupUserMessages("group_123")
+        viewModel.getGroupUserMessagesByField("groupChatId", groupId)
 
         // Observe messages
         viewModel.groupUserMessagesLiveData.observe(viewLifecycleOwner) { messages ->
@@ -61,12 +67,21 @@ class ChatFragment : Fragment() {
             if (messageText.isNotEmpty()) {
                 val message = GroupUserMessage(
                     gumid = "",
-                    groupChatId = "group_123",  // Mock Group ID
-                    groupUserId = "user_001",    // Mock User ID
+                    groupChatId = groupId,  // Mock Group ID
+                    groupUserId = FirebaseHelper.instance!!.getUserId()!!,    // Mock User ID
                     message = messageText,
                     replyMessageId = ""
                 )
-                viewModel.addGroupUserMessage(message)
+                viewModel.addGroupUserMessage(message, object : OnCompleteListener<Void> {
+                    override fun onComplete(task: Task<Void>) {
+                        if (task.isSuccessful) {
+                            viewModel.getGroupUserMessagesByField("groupChatId", groupId)
+                        } else {
+                            Toast.makeText(requireContext(), "add group user failed", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                })
+                viewModel.getGroupUserMessagesByField("groupChatId", groupId)
                 editTextMessage.text.clear()
             }
         }

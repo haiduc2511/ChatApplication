@@ -45,7 +45,7 @@ class GroupUserMessageRepo {
     }
     fun listenToGroupUserMessages(groupChatId: String, callback: (List<GroupUserMessage>?, String?) -> Unit) {
         db.collection(COLLECTION_NAME)
-            .whereEqualTo("groupChatId", groupChatId)
+            .whereEqualTo("groupChatId", groupChatId + "fdsfsd")
             .orderBy("gumid", Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {

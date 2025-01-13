@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.chatapplication2.R
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
@@ -32,6 +33,7 @@ class BookSearchAdapter(
     class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(book: Book) {
             itemView.findViewById<TextView>(R.id.bookTitle).text = book.bookTitle
+            Glide.with(itemView.context).load(book.bookPhotoLink).into(itemView.findViewById(R.id.bookPhoto))
         }
     }
 

@@ -13,6 +13,8 @@ import androidx.lifecycle.Observer
 import com.example.chatapplication2.databinding.ActivityGroupUserMessageBinding
 import com.example.chatapplication2.model.GroupUserMessage
 import com.example.chatapplication2.viewmodel.GroupUserMessageViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 
 
 class GroupUserMessageActivity : AppCompatActivity() {
@@ -48,7 +50,15 @@ class GroupUserMessageActivity : AppCompatActivity() {
                 message = binding.etMessage.text.toString(),
                 replyMessageId = binding.etReplyMessageId.text.toString()
             )
-            groupUserMessageViewModel.addGroupUserMessage(newMessage)
+            groupUserMessageViewModel.addGroupUserMessage(newMessage, object :
+                OnCompleteListener<Void> {
+                override fun onComplete(task: Task<Void>) {
+                    if (task.isSuccessful) {
+                    } else {
+                        Toast.makeText(this@GroupUserMessageActivity, "add group user failed", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
         }
 
         // Get GroupUserMessages button click listener
