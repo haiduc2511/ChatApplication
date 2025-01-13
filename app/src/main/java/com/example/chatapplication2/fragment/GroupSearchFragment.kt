@@ -14,12 +14,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.GroupAdapter
 import com.example.chatapplication2.adapter.GroupSearchAdapter
+import com.example.chatapplication2.model.GroupUser
+import com.example.chatapplication2.utils.FirebaseHelper
 import com.example.chatapplication2.viewmodel.BookViewModel
+import com.example.chatapplication2.viewmodel.GroupUserViewModel
 import com.example.chatapplication2.viewmodel.GroupViewModel
 
 class GroupSearchFragment : Fragment() {
 
-    private lateinit var viewModel: GroupViewModel
+    private lateinit var groupViewModel: GroupViewModel
+    private lateinit var groupUserViewModel: GroupUserViewModel
     private lateinit var searchView: SearchView
     private lateinit var recyclerView: RecyclerView
 
@@ -28,18 +32,24 @@ class GroupSearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_group_search, container, false)
-        viewModel = ViewModelProvider(this)[GroupViewModel::class.java]
+        groupViewModel = ViewModelProvider(this)[GroupViewModel::class.java]
+        groupUserViewModel = ViewModelProvider(this)[GroupUserViewModel::class.java]
 
         searchView = view.findViewById(R.id.searchView)
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val adapter = GroupSearchAdapter()
+        val adapter = GroupSearchAdapter() {
+            groupUserViewModel.addGroupUser(GroupUser(
+                groupId = it.gid,
+                userId = FirebaseHelper.instance!!.getUserId()!!
+            ))
+        }
         recyclerView.adapter = adapter
-        viewModel.getGroups()
+        groupViewModel.getGroups()
 
         // Observe LiveData
-        viewModel.groupsLiveData.observe(viewLifecycleOwner) { groups ->
+        groupViewModel.groupsLiveData.observe(viewLifecycleOwner) { groups ->
             adapter.submitList(groups)
         }
 
@@ -47,7 +57,7 @@ class GroupSearchFragment : Fragment() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (!query.isNullOrEmpty()) {
-                    viewModel.getGroupsByField("groupName", query)
+                    groupViewModel.getGroupsByField("groupName", query)
                 }
                 return true
             }

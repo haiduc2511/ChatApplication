@@ -26,4 +26,11 @@
         android:textSize="14sp"
         android:textColor="@android:color/darker_gray" />
 
+    <Button
+        android:id="@+id/bt_join"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:text="Join" />
+
 </LinearLayout>
