@@ -26,9 +26,11 @@ import com.example.chatapplication2.R
 import com.example.chatapplication2.databinding.FragmentReadBinding
 import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.model.Group
+import com.example.chatapplication2.model.GroupUserComment
 import com.example.chatapplication2.utils.RandomPointsView
 import com.example.chatapplication2.utils.SharedPreferenceManager
 import com.example.chatapplication2.viewmodel.BookViewModel
+import com.example.chatapplication2.viewmodel.GroupUserCommentViewModel
 import com.example.chatapplication2.viewmodel.GroupViewModel
 import com.github.barteksc.pdfviewer.listener.OnLongPressListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
@@ -51,9 +53,21 @@ class ReadFragment : Fragment() {
     private val binding get() = _binding!!
     private val groupViewModel: GroupViewModel by viewModels()
     private val bookViewModel: BookViewModel by viewModels()
+    private val groupUserCommentViewModel: GroupUserCommentViewModel by viewModels()
     private var bookReadingId: String = ""
     private var seeingComments: Boolean = true
     private var pageNumber: Int = 0
+    private lateinit var group: Group
+    private lateinit var pointView: RandomPointsView
+    private var commentList = listOf<GroupUserComment>()
+    val colors = mapOf(
+        "Red" to Color.RED,
+        "Green" to Color.GREEN,
+        "Blue" to Color.BLUE,
+        "Yellow" to Color.YELLOW,
+        "Black" to Color.BLACK
+    )
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,20 +83,9 @@ class ReadFragment : Fragment() {
         val yCoordinate = view.findViewById<EditText>(R.id.yCoordinate)
         val colorSpinner = view.findViewById<Spinner>(R.id.colorSpinner)
         val addPointButton = view.findViewById<Button>(R.id.addPointButton)
-        val pointView = view.findViewById<RandomPointsView>(R.id.randomPointsView)
+        pointView = view.findViewById<RandomPointsView>(R.id.randomPointsView)
 
-        pointView.onPointClickListener = { x, y ->
-            showFragment(GroupUserCommentFragment(pageNumber ,x, y))
-            Toast.makeText(requireContext(), "Point clicked: ($x, $y)", Toast.LENGTH_SHORT).show()
-        }
         // Color options
-        val colors = mapOf(
-            "Red" to Color.RED,
-            "Green" to Color.GREEN,
-            "Blue" to Color.BLUE,
-            "Yellow" to Color.YELLOW,
-            "Black" to Color.BLACK
-        )
 
         // Set up Spinner with color options
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, colors.keys.toList())
@@ -138,14 +141,22 @@ class ReadFragment : Fragment() {
 
         Log.d("check book null", bookId)
         Log.d("check group null", groupId)
-
         if (!bookReadingId.equals(bookId)) {
             groupViewModel.getGroupById(groupId, object : OnCompleteListener<QuerySnapshot> {
                 override fun onComplete(task: Task<QuerySnapshot>) {
                     if (task.isSuccessful) {
+                        Log.d("groupViewModel in load again", "groupViewModel successful")
                         val groups = task.result?.toObjects(Group::class.java) ?: emptyList()
                         if (groups.isNotEmpty()) {
                             //TODO: làm thêm phần customView cho đống comment
+                            group = groups[0]
+                            pointView.onPointClickListener = { x, y ->
+                                showFragment(GroupUserCommentFragment(group, pageNumber ,x, y))
+                                Toast.makeText(requireContext(), "Point clicked: ($x, $y)", Toast.LENGTH_SHORT).show()
+                            }
+
+                            getCommentFromGroupUser()
+
                         }
                     }
                 }
@@ -156,6 +167,7 @@ class ReadFragment : Fragment() {
                     if (task.isSuccessful) {
                         val books = task.result?.toObjects(Book::class.java) ?: emptyList()
                         if (books.isNotEmpty()) {
+                            Log.d("downloadAndOpenPdf in load again", books.toString())
                             downloadAndOpenPdf(books[0].fileBookLink)
                         }
                     }
@@ -165,6 +177,7 @@ class ReadFragment : Fragment() {
         }
 
         bookReadingId = bookId
+
 
     }
     private fun openFileChooser() {
@@ -245,18 +258,56 @@ class ReadFragment : Fragment() {
                     "Long press: ${e.x}, ${e.y}",
                     Toast.LENGTH_SHORT
                 ).show()
-                showFragment(GroupUserCommentFragment(pageNumber))
+                val screenX = 100 * e.x / pointView.width
+                val screenY = 100 * e.y / pointView.height
+                showFragment(GroupUserCommentFragment(group, pageNumber, screenX, screenY))
             })
             .onPageChange(OnPageChangeListener { page, pageCount ->
-//                Toast.makeText(
-//                    requireContext(),
-//                    "Page changed: ${page + 1} / $pageCount",
-//                    Toast.LENGTH_SHORT
-//                ).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Page changed: ${page + 1} / $pageCount",
+                    Toast.LENGTH_SHORT
+                ).show()
                 binding.textView.text = "${page + 1} / $pageCount"
                 pageNumber = page + 1
+                pointView.clearPoints()
+                drawCommentDots(pageNumber)
             })
             .load()
+    }
+
+    fun getCommentFromGroupUser() {
+        groupUserCommentViewModel.getGroupUserCommentsByField("groupId", group.gid)
+        groupUserCommentViewModel.groupUserCommentsLiveData.observe(viewLifecycleOwner) { comments ->
+            Log.d("check drawCommentDots2", group.gid + " " + comments.toString())
+            commentList = comments
+        }
+    }
+
+    fun drawCommentDots(pageNumber: Int) {
+
+        Log.d("check drawCommentDots", commentList.toString())
+        for (comment in commentList) {
+            if (comment.pageNumber.toInt() == pageNumber) {
+                val x = comment.pagePositionX.toFloatOrNull()
+                val y = comment.pagePositionY.toFloatOrNull()
+//                val selectedColorName = colorSpinner.selectedItem as String
+//                val selectedColor = colors[selectedColorName] ?: Color.RED
+                val selectedColor = Color.RED
+
+                if (x != null && y != null && x in 0f..100f && y in 0f..100f) {
+                    // Convert coordinates to screen pixels
+                    val screenX = pointView.width * (x / 100)
+                    val screenY = pointView.height * (y / 100)
+
+                    pointView.addPoint(x, y, selectedColor)
+                    Log.d("check toạ độ point", "$screenX + $screenX + ${commentList.toString()}")
+                } else {
+                    Log.d("vẽ điểm lên pointView", "$comment invalid coordinates. Enter values between 0 and 100.")
+                }
+            }
+
+        }
     }
 
     override fun onDestroyView() {

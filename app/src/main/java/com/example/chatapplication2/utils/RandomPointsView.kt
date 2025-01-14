@@ -26,6 +26,10 @@ class RandomPointsView @JvmOverloads constructor(
         Log.d("check toạ độ point", "${points.toString()}")
         invalidate() // Redraw the view
     }
+    fun clearPoints() {
+        points.clear() // Xóa tất cả các điểm trong danh sách
+        invalidate()   // Làm mới giao diện
+    }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

@@ -23,7 +23,7 @@ class GroupUserCommentAdapter : ListAdapter<GroupUserComment, GroupUserCommentAd
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(comment: GroupUserComment) {
-            binding.tvUserName.text = comment.groupUserId
+            binding.tvUserName.text = comment.userId
             binding.tvComment.text = comment.comment
             binding.tvTimeStamp.text = formatTimestamp(comment.timeStamp)
         }

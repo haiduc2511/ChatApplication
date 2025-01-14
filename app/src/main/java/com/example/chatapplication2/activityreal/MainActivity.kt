@@ -66,15 +66,16 @@ class MainActivity : AppCompatActivity() {
 
         // Create the first fragment (MainFragment) and add it to the container
 
-        val readFragment = ReadFragment()
+        var readFragment = ReadFragment()
         fragments[R.id.nav_read] = readFragment
-        val groupChatFragment = GroupChatFragment()
+        var groupChatFragment = GroupChatFragment()
         fragments[R.id.nav_chat] = groupChatFragment
-        val searchFragment = SearchFragment()
+        var searchFragment = SearchFragment()
         fragments[R.id.nav_search] = searchFragment
-        val accountFragment = AccountFragment()
+        var accountFragment = AccountFragment()
         fragments[R.id.nav_profile] = accountFragment
-        val mainFragment = MainFragment() {
+        var mainFragment = MainFragment() {
+            readFragment = fragments[R.id.nav_read] as ReadFragment
             readFragment.loadNewGroupFromMainFragment()
             binding.bnMain.selectedItemId = R.id.nav_read
         }
@@ -119,6 +120,7 @@ class MainActivity : AppCompatActivity() {
                 // Tạo lại fragment mới
                 val newFragment = when (menuItem.itemId) {
                     R.id.nav_home -> MainFragment() {
+                        readFragment = fragments[R.id.nav_read] as ReadFragment
                         readFragment.loadNewGroupFromMainFragment()
                         binding.bnMain.selectedItemId = R.id.nav_read
                     }
