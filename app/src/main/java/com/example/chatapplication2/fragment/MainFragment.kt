@@ -130,7 +130,7 @@ class MainFragment(
                             binding.tvRecentBookName.text =
                                 bookMap[mostRecentGroup.bookId]?.bookTitle ?: "Unknown"
                             Glide.with(this@MainFragment)
-                                .load(mostRecentGroup.groupPhotoLink)
+                                .load(bookMap[mostRecentGroup.bookId]?.bookPhotoLink)
                                 .into(binding.ivRecentBookCover)
                         }
                     }

@@ -66,13 +66,13 @@ class BookSearchFragment : Fragment() {
                 return false
             }
         })
-        var imageView3: ImageView = view.findViewById(R.id.imageView3)
-        imageView3.setOnClickListener {
-            val book: Book = adapter.currentList.get(0)
-            Glide.with(this)
-                .load(book.fileBookLink)
-                .into(imageView3)
-        }
+//        var imageView3: ImageView = view.findViewById(R.id.imageView3)
+//        imageView3.setOnClickListener {
+//            val book: Book = adapter.currentList.get(0)
+//            Glide.with(this)
+//                .load(book.fileBookLink)
+//                .into(imageView3)
+//        }
 
         return view
     }
