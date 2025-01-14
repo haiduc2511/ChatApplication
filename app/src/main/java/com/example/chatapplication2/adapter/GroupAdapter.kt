@@ -38,12 +38,12 @@ class GroupAdapter(private val groups: List<Group>,
         }
         Glide.with(holder.itemView.context).asBitmap().load(groups[position].groupPhotoLink).into(holder.binding.ivBookCover)
         holder.itemView.setOnClickListener {
-            onGroupClick()
             SharedPreferenceManager(holder.itemView.context).apply {
                 setString("mostRecentGroupId", groups[position].gid)
                 setString("aboutToReadGroupId", groups[position].gid)
                 setString("aboutToReadBookId", book!!.bid)
             }
+            onGroupClick()
 //            Intent(it.context, ReadActivity::class.java).apply {
 //                putExtra("group", groups[position]) // Replace "key_name" and "YourStringValue" with your key and value
 //                putExtra("book", book)

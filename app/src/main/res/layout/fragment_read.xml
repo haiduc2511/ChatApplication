@@ -64,36 +64,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/xCoordinate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Enter X (0-100)"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <EditText-->
+<!--            android:id="@+id/xCoordinate"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="Enter X (0-100)"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <EditText
-            android:id="@+id/yCoordinate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Enter Y (0-100)"
-            app:layout_constraintStart_toEndOf="@+id/xCoordinate"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <EditText-->
+<!--            android:id="@+id/yCoordinate"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="Enter Y (0-100)"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/xCoordinate"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <Button
-            android:id="@+id/addPointButton"
-            android:layout_width="98dp"
-            android:layout_height="40dp"
-            android:text="Add Point"
-            app:layout_constraintStart_toEndOf="@+id/yCoordinate"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <Button-->
+<!--            android:id="@+id/addPointButton"-->
+<!--            android:layout_width="98dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:text="Add Point"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/yCoordinate"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <Spinner
-            android:id="@+id/colorSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/xCoordinate" />
+<!--        <Spinner-->
+<!--            android:id="@+id/colorSpinner"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/xCoordinate" />-->
         <com.example.chatapplication2.utils.RandomPointsView
             android:id="@+id/randomPointsView"
             android:layout_width="match_parent"

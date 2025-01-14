@@ -58,11 +58,11 @@ class MainFragment(
         }
 
 
-        binding.ibSearch.setOnClickListener {
-            val intent = Intent(requireContext(), ChatActivity::class.java)
-            startActivity(intent)
-
-        }
+//        binding.ibSearch.setOnClickListener {
+//            val intent = Intent(requireContext(), ChatActivity::class.java)
+//            startActivity(intent)
+//
+//        }
 
         // Set up RecyclerView
         binding.rvBookRecommendList.layoutManager =

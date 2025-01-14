@@ -55,6 +55,7 @@ class ReadFragment : Fragment() {
     private val bookViewModel: BookViewModel by viewModels()
     private val groupUserCommentViewModel: GroupUserCommentViewModel by viewModels()
     private var bookReadingId: String = ""
+    private var groupReadingId: String = ""
     private var seeingComments: Boolean = true
     private var pageNumber: Int = 0
     private lateinit var group: Group
@@ -79,10 +80,10 @@ class ReadFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val xCoordinate = view.findViewById<EditText>(R.id.xCoordinate)
-        val yCoordinate = view.findViewById<EditText>(R.id.yCoordinate)
-        val colorSpinner = view.findViewById<Spinner>(R.id.colorSpinner)
-        val addPointButton = view.findViewById<Button>(R.id.addPointButton)
+//        val xCoordinate = view.findViewById<EditText>(R.id.xCoordinate)
+//        val yCoordinate = view.findViewById<EditText>(R.id.yCoordinate)
+//        val colorSpinner = view.findViewById<Spinner>(R.id.colorSpinner)
+//        val addPointButton = view.findViewById<Button>(R.id.addPointButton)
         pointView = view.findViewById<RandomPointsView>(R.id.randomPointsView)
 
         // Color options
@@ -90,25 +91,25 @@ class ReadFragment : Fragment() {
         // Set up Spinner with color options
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, colors.keys.toList())
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        colorSpinner.adapter = adapter
-
-        addPointButton.setOnClickListener {
-            val x = xCoordinate.text.toString().toFloatOrNull()
-            val y = yCoordinate.text.toString().toFloatOrNull()
-            val selectedColorName = colorSpinner.selectedItem as String
-            val selectedColor = colors[selectedColorName] ?: Color.RED
-
-            if (x != null && y != null && x in 0f..100f && y in 0f..100f) {
-                // Convert coordinates to screen pixels
-                val screenX = pointView.width * (x / 100)
-                val screenY = pointView.height * (y / 100)
-                Log.d("check toạ độ point2", "${pointView.width} + ${pointView.height} + $x + $y")
-
-                pointView.addPoint(x, y, selectedColor)
-            } else {
-                Toast.makeText(requireContext(), "Invalid coordinates. Enter values between 0 and 100.", Toast.LENGTH_SHORT).show()
-            }
-        }
+//        colorSpinner.adapter = adapter
+//
+//        addPointButton.setOnClickListener {
+//            val x = xCoordinate.text.toString().toFloatOrNull()
+//            val y = yCoordinate.text.toString().toFloatOrNull()
+//            val selectedColorName = colorSpinner.selectedItem as String
+//            val selectedColor = colors[selectedColorName] ?: Color.RED
+//
+//            if (x != null && y != null && x in 0f..100f && y in 0f..100f) {
+//                // Convert coordinates to screen pixels
+//                val screenX = pointView.width * (x / 100)
+//                val screenY = pointView.height * (y / 100)
+//                Log.d("check toạ độ point2", "${pointView.width} + ${pointView.height} + $x + $y")
+//
+//                pointView.addPoint(x, y, selectedColor)
+//            } else {
+//                Toast.makeText(requireContext(), "Invalid coordinates. Enter values between 0 and 100.", Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
         binding.ivSeeComments.setOnClickListener {
             if (seeingComments) {
@@ -141,7 +142,7 @@ class ReadFragment : Fragment() {
 
         Log.d("check book null", bookId)
         Log.d("check group null", groupId)
-        if (!bookReadingId.equals(bookId)) {
+        if (!bookReadingId.equals(bookId) && !groupReadingId.equals(groupId)) {
             groupViewModel.getGroupById(groupId, object : OnCompleteListener<QuerySnapshot> {
                 override fun onComplete(task: Task<QuerySnapshot>) {
                     if (task.isSuccessful) {
@@ -156,6 +157,7 @@ class ReadFragment : Fragment() {
                             }
 
                             getCommentFromGroupUser()
+                            groupReadingId = groupId
 
                         }
                     }
@@ -169,6 +171,7 @@ class ReadFragment : Fragment() {
                         if (books.isNotEmpty()) {
                             Log.d("downloadAndOpenPdf in load again", books.toString())
                             downloadAndOpenPdf(books[0].fileBookLink)
+                            bookReadingId = bookId
                         }
                     }
                 }
@@ -176,7 +179,6 @@ class ReadFragment : Fragment() {
 
         }
 
-        bookReadingId = bookId
 
 
     }

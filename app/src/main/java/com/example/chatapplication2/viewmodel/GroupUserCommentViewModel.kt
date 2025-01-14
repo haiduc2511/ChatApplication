@@ -2,6 +2,7 @@ package com.example.chatapplication2.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.chatapplication2.model.Group
 import com.example.chatapplication2.model.GroupEntryRequest
 import com.example.chatapplication2.model.GroupUserComment
 import com.example.chatapplication2.repo.GroupEntryRequestRepo
@@ -32,6 +33,19 @@ class GroupUserCommentViewModel : ViewModel() {
             }
         })
     }
+
+    fun addGroupUserCommentInGroupUserCommentFragment(comment: GroupUserComment, group: Group) {
+        groupUserCommentRepo.addGroupUserComment(comment, object : OnCompleteListener<Void> {
+            override fun onComplete(task: Task<Void>) {
+                if (task.isSuccessful) {
+                    getGroupUserCommentsByField("groupId", group.gid)
+                } else {
+                    _errorLiveData.postValue("Error: ${task.exception?.message}")
+                }
+            }
+        })
+    }
+
 
     // Get all group user comments
     fun getGroupUserComments() {

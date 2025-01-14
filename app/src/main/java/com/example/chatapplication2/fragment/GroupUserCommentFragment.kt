@@ -1,6 +1,7 @@
 package com.example.chatapplication2.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -54,7 +55,12 @@ class GroupUserCommentFragment(
 
         // Lắng nghe dữ liệu từ ViewModel
         groupUserCommentViewModel.groupUserCommentsLiveData.observe(viewLifecycleOwner) { comments ->
-            adapter.submitList(comments)
+            val filteredCommentsList: List<GroupUserComment> = comments.filter {
+                Log.d("check filteredCommentsList", "$posX $posY $pageNumber  $it")
+                it.pagePositionX.toFloat() == posX
+                        && it.pagePositionX.toFloat() == posY
+                         it.pageNumber.toInt() == pageNumber}
+            adapter.submitList(filteredCommentsList)
         }
 
         clMain.setOnClickListener {
@@ -78,13 +84,13 @@ class GroupUserCommentFragment(
                     pagePositionY = posY.toString(),
                     timeStamp = System.currentTimeMillis().toString()
                 )
-                groupUserCommentViewModel.addGroupUserComment(newComment)
+                groupUserCommentViewModel.addGroupUserCommentInGroupUserCommentFragment(newComment, group)
                 etComment.text.clear()
             }
         }
 
         // Lấy danh sách comments
-        groupUserCommentViewModel.getGroupUserComments()
+        groupUserCommentViewModel.getGroupUserCommentsByField("groupId", group.gid)
 
         return view
     }
