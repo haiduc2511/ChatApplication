@@ -1,10 +1,7 @@
-package com.example.chatapplication2.activityreal
+package com.example.chatapplication2.activity
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.chatapplication2.R
 import com.example.chatapplication2.adapter.SearchPagerAdapter

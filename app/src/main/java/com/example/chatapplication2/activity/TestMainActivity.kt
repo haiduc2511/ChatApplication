@@ -1,4 +1,4 @@
-package com.example.chatapplication2.activityreal
+package com.example.chatapplication2.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.chatapplication2.R
 import com.example.chatapplication2.activitytest.BookActivity
 import com.example.chatapplication2.activitytest.BookTagActivity
-import com.example.chatapplication2.activitytest.GroupActivity
 import com.example.chatapplication2.activitytest.GroupChatActivity
 import com.example.chatapplication2.activitytest.GroupEntryRequestActivity
 import com.example.chatapplication2.activitytest.GroupUserActivity

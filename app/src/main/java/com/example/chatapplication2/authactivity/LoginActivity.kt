@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.chatapplication2.activityreal.MainActivity
+import com.example.chatapplication2.activity.MainActivity
 import com.example.chatapplication2.R
 import com.example.chatapplication2.databinding.ActivityLoginBinding
 import com.example.chatapplication2.model.User

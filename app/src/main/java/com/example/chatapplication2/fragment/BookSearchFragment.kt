@@ -5,20 +5,14 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.viewModels
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.chatapplication2.R
-import com.example.chatapplication2.activityreal.BookDetailActivity
-import com.example.chatapplication2.activitytest.BookActivity
-import com.example.chatapplication2.activitytest.GroupActivity
+import com.example.chatapplication2.activity.BookDetailActivity
 import com.example.chatapplication2.adapter.BookSearchAdapter
-import com.example.chatapplication2.model.Book
 import com.example.chatapplication2.viewmodel.BookViewModel
 
 class BookSearchFragment : Fragment() {

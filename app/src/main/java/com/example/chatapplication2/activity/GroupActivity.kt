@@ -1,4 +1,4 @@
-package com.example.chatapplication2.activitytest
+package com.example.chatapplication2.activity
 
 import android.Manifest
 import android.content.ContentValues
@@ -7,11 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.chatapplication2.R
 
 import android.widget.Toast
 import androidx.activity.viewModels

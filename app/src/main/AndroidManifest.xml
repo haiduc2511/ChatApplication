@@ -20,22 +20,22 @@
         android:theme="@style/Theme.ChatApplication2"
         tools:targetApi="31">
         <activity
-            android:name=".activityreal.SearchActivity"
+            android:name=".activity.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".activityreal.ChatActivity"
+            android:name=".activitytest.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".activityreal.BookDetailActivity"
+            android:name=".activity.BookDetailActivity"
             android:exported="false" />
         <activity
             android:name=".activitytest.UserPostActivity"
             android:exported="false" />
         <activity
-            android:name=".activityreal.ReadActivity"
+            android:name=".activity.ReadActivity"
             android:exported="false" />
         <activity
-            android:name=".activityreal.TestMainActivity"
+            android:name=".activity.TestMainActivity"
             android:exported="false" />
         <activity
             android:name=".authactivity.RegisterActivity"
@@ -65,7 +65,7 @@
             android:name=".activitytest.GroupUserCommentActivity"
             android:exported="false" />
         <activity
-            android:name=".activitytest.GroupActivity"
+            android:name=".activity.GroupActivity"
             android:exported="false" />
         <activity
             android:name=".activitytest.GroupEntryRequestActivity"
@@ -83,7 +83,7 @@
             android:name=".authactivity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activityreal.MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false" />
     </application>
 

@@ -1,18 +1,11 @@
-package com.example.chatapplication2.activityreal
+package com.example.chatapplication2.activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
-import com.example.chatapplication2.R
-import com.example.chatapplication2.activitytest.GroupActivity
 import com.example.chatapplication2.databinding.ActivityBookDetailBinding
-import com.example.chatapplication2.databinding.ActivityReadBinding
 import com.example.chatapplication2.model.Book
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class BookDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBookDetailBinding
