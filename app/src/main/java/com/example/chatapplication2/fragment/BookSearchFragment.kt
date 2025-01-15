@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chatapplication2.R
+import com.example.chatapplication2.activityreal.BookDetailActivity
 import com.example.chatapplication2.activitytest.BookActivity
 import com.example.chatapplication2.activitytest.GroupActivity
 import com.example.chatapplication2.adapter.BookSearchAdapter
@@ -38,7 +39,7 @@ class BookSearchFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val adapter = BookSearchAdapter() {
-            Intent(requireContext(), GroupActivity::class.java).apply {
+            Intent(requireContext(), BookDetailActivity::class.java).apply {
                 val bundle = Bundle()
                 bundle.putParcelable("book", it)
                 putExtras(bundle)
