@@ -127,6 +127,20 @@ class MainFragment(
                         if (groups.isNotEmpty()) {
                             val mostRecentGroup = groups[0]
                             binding.tvRecentGroupName.text = mostRecentGroup.groupName
+                            bookViewModel.getBookById(mostRecentGroup.bookId, object : OnCompleteListener<QuerySnapshot> {
+                                override fun onComplete(task: Task<QuerySnapshot>) {
+                                    if (task.isSuccessful) {
+                                        val books = task.result?.toObjects(Book::class.java) ?: emptyList()
+                                        if (books.isNotEmpty()) {
+                                            val mostRecentBook = books[0]
+                                            binding.tvRecentBookName.text = mostRecentBook.bookTitle
+                                            Glide.with(this@MainFragment)
+                                                .load(mostRecentBook.bookPhotoLink)
+                                                .into(binding.ivRecentBookCover)
+                                        }
+                                    }
+                                }
+                            })
                             binding.tvRecentBookName.text =
                                 bookMap[mostRecentGroup.bookId]?.bookTitle ?: "Unknown"
                             Glide.with(this@MainFragment)
