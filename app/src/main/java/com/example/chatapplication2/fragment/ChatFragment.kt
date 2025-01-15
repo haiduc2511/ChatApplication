@@ -50,6 +50,8 @@ class ChatFragment(
         val fabBack: FloatingActionButton = view.findViewById(R.id.floatingActionButton)
         val tvGroupName: TextView = view.findViewById(R.id.tv_group_name2)
 
+        tvGroupName.text = group.groupName
+
         fabBack.setOnClickListener {
             removeFragment()
         }
