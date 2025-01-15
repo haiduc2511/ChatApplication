@@ -7,6 +7,7 @@ import com.example.chatapplication2.model.GroupUserMessage
 import com.example.chatapplication2.repo.GroupUserMessageRepo
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 class GroupUserMessageViewModel : ViewModel() {
 
@@ -49,6 +50,19 @@ class GroupUserMessageViewModel : ViewModel() {
                 }
             }
         })
+    }
+    fun getGroupUserMessagesByField2(field: String, value: String) {
+        FirebaseFirestore.getInstance().collection("groupUserMessages")
+            .whereEqualTo(field, value)
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Log.w("Firestore", "Listen failed.", e)
+                    return@addSnapshotListener
+                }
+
+                val messages = snapshots?.documents?.mapNotNull { it.toObject(GroupUserMessage::class.java) }
+                _groupUserMessagesLiveData.postValue(messages!!)
+            }
     }
 
     // Update a group user message

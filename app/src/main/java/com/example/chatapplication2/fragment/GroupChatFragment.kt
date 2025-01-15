@@ -54,7 +54,7 @@ class GroupChatFragment : Fragment() {
     private fun setupRecyclerView() {
         groupToChatAdapter = GroupToChatAdapter { group ->
             val fragmentManager = childFragmentManager
-            val chatFragment = ChatFragment(group.gid)
+            val chatFragment = ChatFragment(group)
             fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, chatFragment)
                 .commit()

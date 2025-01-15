@@ -70,7 +70,7 @@ class MainFragment(
 
         // Fetch groups and books from ViewModel
         val userId = FirebaseHelper.instance!!.getUserId()!!
-        Toast.makeText(context, userId, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context, userId, Toast.LENGTH_SHORT).show()
 
         groupUserViewModel.getGroupUsersByField("userId", userId)
         groupUserViewModel.groupUsersLiveData.observe(viewLifecycleOwner) {groupUsers ->

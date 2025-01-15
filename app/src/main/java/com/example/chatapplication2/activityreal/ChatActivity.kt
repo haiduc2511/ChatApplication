@@ -54,7 +54,7 @@ class ChatActivity : AppCompatActivity() {
                     groupChatId = "group_123",  // Group ID giả lập
                     groupUserId = "user_001",    // User ID giả lập
                     message = messageText,
-                    replyMessageId = ""
+                    timeStamp = ""
                 )
                 viewModel.addGroupUserMessage(message, object : OnCompleteListener<Void> {
                     override fun onComplete(task: Task<Void>) {

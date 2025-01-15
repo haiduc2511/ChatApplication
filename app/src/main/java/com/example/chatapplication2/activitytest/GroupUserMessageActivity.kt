@@ -48,7 +48,7 @@ class GroupUserMessageActivity : AppCompatActivity() {
                 groupChatId = binding.etGroupChatId.text.toString(),
                 groupUserId = binding.etGroupUserId.text.toString(),
                 message = binding.etMessage.text.toString(),
-                replyMessageId = binding.etReplyMessageId.text.toString()
+                timeStamp = binding.etReplyMessageId.text.toString()
             )
             groupUserMessageViewModel.addGroupUserMessage(newMessage, object :
                 OnCompleteListener<Void> {
@@ -74,7 +74,7 @@ class GroupUserMessageActivity : AppCompatActivity() {
                 groupChatId = binding.etGroupChatId.text.toString(),
                 groupUserId = binding.etGroupUserId.text.toString(),
                 message = binding.etMessage.text.toString(),
-                replyMessageId = binding.etReplyMessageId.text.toString()
+                timeStamp = binding.etReplyMessageId.text.toString()
             )
             groupUserMessageViewModel.updateGroupUserMessage(messageId, updatedMessage)
         }
