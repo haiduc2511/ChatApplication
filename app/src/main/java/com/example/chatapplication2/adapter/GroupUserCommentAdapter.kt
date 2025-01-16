@@ -8,9 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.chatapplication2.R
 import com.example.chatapplication2.databinding.ItemGroupUserCommentBinding
 import com.example.chatapplication2.model.GroupUserComment
+import com.example.chatapplication2.model.User
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -23,9 +26,14 @@ class GroupUserCommentAdapter : ListAdapter<GroupUserComment, GroupUserCommentAd
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(comment: GroupUserComment) {
-            binding.tvUserName.text = comment.userId
             binding.tvComment.text = comment.comment
             binding.tvTimeStamp.text = formatTimestamp(comment.timeStamp)
+            FirebaseFirestore.getInstance().collection("users").document(comment.userId).get().addOnCompleteListener {
+                var user = it.result?.toObject(User::class.java)
+                binding.tvUserName.text = user!!.name
+                Glide.with(itemView.context).load(user.avaLink).error(R.drawable.ic_user).into(binding.imageProfile)
+            }
+
         }
 
         private fun formatTimestamp(timestamp: String): String {

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
         <!-- Ảnh profile của user -->
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageProfile"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -22,18 +22,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tvComment"
-            app:srcCompat="@drawable/ic_user" />
+            android:src="@drawable/ic_user" />
 
         <!-- Tên user -->
         <TextView
             android:id="@+id/tvUserName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:layout_marginStart="8dp"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imageProfile"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             tools:text="User Name" />
 
         <!-- Bình luận -->
@@ -41,11 +42,12 @@
             android:id="@+id/tvComment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:layout_marginStart="8dp"
             android:paddingTop="4dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imageProfile"
             app:layout_constraintTop_toBottomOf="@id/tvUserName"
-            app:layout_constraintEnd_toEndOf="parent"
             tools:text="This is a sample comment." />
 
         <!-- Thời gian -->
