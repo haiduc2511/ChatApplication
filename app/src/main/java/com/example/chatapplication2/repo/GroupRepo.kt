@@ -1,6 +1,7 @@
 package com.example.chatapplication2.repo
 
 import android.net.Uri
+import android.util.Log
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.UploadCallback
 import com.example.chatapplication2.model.Group
@@ -10,6 +11,10 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class GroupRepo {
 
@@ -60,17 +65,28 @@ class GroupRepo {
 
     fun uploadGroupPhotoCloudinary(
         imageUri: Uri?,
-        uploadCallback: UploadCallback?,
+        uploadCallback: UploadCallback?
     ) {
-        val imageId = System.currentTimeMillis().toString() + myUserId
-        val options: MutableMap<String, Any> = HashMap()
-        options["format"] = "jpg"
-        options["folder"] = "groupPhoto"
-        options["public_id"] = imageId
-        MediaManager.get().upload(imageUri)
-            .unsigned("your_unsigned_preset")
-            .options(options)
-            .callback(uploadCallback).dispatch()
-    }
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val imageId = System.currentTimeMillis().toString() + myUserId
+                val options: MutableMap<String, Any> = HashMap()
+                options["format"] = "jpg"
+                options["folder"] = "groupPhoto"
+                options["public_id"] = imageId
 
+                withContext(Dispatchers.Main) {
+                    MediaManager.get().upload(imageUri)
+                        .unsigned("your_unsigned_preset")
+                        .options(options)
+                        .callback(uploadCallback)
+                        .dispatch()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.d("Error uploading image", e.message ?: "Unknown error")
+                }
+            }
+        }
+    }
 }
