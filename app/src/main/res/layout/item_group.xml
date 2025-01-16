@@ -32,8 +32,11 @@
                 android:id="@+id/tv_group_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginHorizontal="4dp"
                 android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 android:text="Group's name"
                 app:layout_constraintStart_toStartOf="@+id/iv_book_cover"
                 app:layout_constraintTop_toBottomOf="@+id/iv_book_cover" />
@@ -42,9 +45,14 @@
                 android:id="@+id/tv_book_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:text="Book's name"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/iv_book_cover"
                 app:layout_constraintTop_toBottomOf="@+id/tv_group_name" />
 

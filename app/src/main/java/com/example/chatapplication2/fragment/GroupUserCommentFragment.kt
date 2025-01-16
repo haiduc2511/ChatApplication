@@ -58,8 +58,8 @@ class GroupUserCommentFragment(
             val filteredCommentsList: List<GroupUserComment> = comments.filter {
                 Log.d("check filteredCommentsList", "$posX $posY $pageNumber  $it")
                 it.pagePositionX.toFloat() == posX
-                        && it.pagePositionX.toFloat() == posY
-                         it.pageNumber.toInt() == pageNumber}
+                        && it.pagePositionY.toFloat() == posY
+                        &&  it.pageNumber.toInt() == pageNumber}
             adapter.submitList(filteredCommentsList)
         }
 

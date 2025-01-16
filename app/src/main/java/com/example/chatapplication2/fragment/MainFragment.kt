@@ -123,14 +123,14 @@ class MainFragment(
                         val groups = task.result?.toObjects(Group::class.java) ?: emptyList()
                         if (groups.isNotEmpty()) {
                             val mostRecentGroup = groups[0]
-                            binding.tvRecentGroupName.text = mostRecentGroup.groupName
+                            binding.tvRecentGroupName.text = "Nhóm:\n" + mostRecentGroup.groupName
                             bookViewModel.getBookById(mostRecentGroup.bookId, object : OnCompleteListener<QuerySnapshot> {
                                 override fun onComplete(task: Task<QuerySnapshot>) {
                                     if (task.isSuccessful) {
                                         val books = task.result?.toObjects(Book::class.java) ?: emptyList()
                                         if (books.isNotEmpty()) {
                                             val mostRecentBook = books[0]
-                                            binding.tvRecentBookName.text = mostRecentBook.bookTitle
+                                            binding.tvRecentBookName.text = "Tên sách: " + mostRecentBook.bookTitle
                                             Glide.with(this@MainFragment)
                                                 .load(mostRecentBook.bookPhotoLink)
                                                 .into(binding.ivRecentBookCover)

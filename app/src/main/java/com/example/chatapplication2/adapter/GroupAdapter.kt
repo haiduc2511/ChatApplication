@@ -25,7 +25,7 @@ class GroupAdapter(private val groups: List<Group>,
         holder.binding.tvGroupName.setText("${groups[position].groupName}")
         val book = books.get("${groups[position].bookId}")
         if (book != null) {
-            holder.binding.tvBookName.setText("" + book!!.bookTitle)
+            holder.binding.tvBookName.setText("Tên sách: " + book!!.bookTitle)
             Glide.with(holder.itemView.context).asBitmap().load(book.bookPhotoLink).into(holder.binding.ivBookCover)
         } else {
             holder.binding.tvBookName.setText("Sách không tồn tại")
